@@ -617,9 +617,6 @@
             min-height: 1.5em;
         }
         .practice-toolbar {
-            position: sticky;
-            top: 0;
-            z-index: 6;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -764,6 +761,46 @@
         .readiness-contract h3 { margin: 0 0 0.65rem; color: var(--accent-green); font-size: 1.08rem; }
         .readiness-contract ol { margin: 0.5rem 0 0; padding-left: 1.35rem; line-height: 1.8; }
         .readiness-contract .honest { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 1rem; line-height: 1.65; }
+        /* Timed practice exam: fullscreen + test-only chrome */
+        html.pt-timed-exam,
+        html.pt-timed-exam body {
+            height: 100%;
+            min-height: 100%;
+        }
+        html.pt-timed-exam body {
+            overflow: hidden;
+        }
+        html.pt-timed-exam .header,
+        html.pt-timed-exam .sidebar {
+            display: none !important;
+        }
+        html.pt-timed-exam .main-layout {
+            height: 100vh;
+            height: 100dvh;
+            min-height: 0;
+        }
+        html.pt-timed-exam .content-wrapper {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+        html.pt-timed-exam .content {
+            padding: 1rem clamp(1rem, 3vw, 2rem) 3rem;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        html.pt-timed-exam #practice .summary-box {
+            display: none !important;
+        }
+        html.pt-timed-exam #practice .chapter-content {
+            max-width: 52rem;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 16px;
+        }
+        html.pt-timed-exam .practice-toolbar {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -2183,6 +2220,7 @@
     }
 
     function showHome() {
+        if (document.documentElement.classList.contains('pt-timed-exam')) clearPtTimer();
         hideAllViews();
         homeScreen.classList.add('active');
         document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
@@ -2191,6 +2229,7 @@
     }
 
     function showChapter(chapterId) {
+        if (chapterId !== 'practice' && document.documentElement.classList.contains('pt-timed-exam')) clearPtTimer();
         hideAllViews();
         mainContent.classList.add('visible');
         document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
@@ -2262,7 +2301,7 @@
         }
     });
     document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement) studyBtn.textContent = 'Study mode (fullscreen)';
+        studyBtn.textContent = document.fullscreenElement ? 'Exit study mode' : 'Study mode (fullscreen)';
     });
 
     /* Acronym table */
@@ -2312,7 +2351,7 @@
     let ptTimerInterval = null;
     let ptTimerEnd = 0;
 
-    function clearPtTimer() {
+    function resetPtTimerOnly() {
         if (ptTimerInterval) {
             clearInterval(ptTimerInterval);
             ptTimerInterval = null;
@@ -2324,6 +2363,26 @@
         }
         if (ptTimerBtn) ptTimerBtn.textContent = 'Start 45-min timer';
     }
+
+    function exitPtTimedExamShell() {
+        if (!document.documentElement.classList.contains('pt-timed-exam')) return;
+        document.documentElement.classList.remove('pt-timed-exam');
+        if (document.fullscreenElement) {
+            document.exitFullscreen().catch(() => {});
+        }
+    }
+
+    function clearPtTimer() {
+        resetPtTimerOnly();
+        exitPtTimedExamShell();
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement && document.documentElement.classList.contains('pt-timed-exam')) {
+            document.documentElement.classList.remove('pt-timed-exam');
+            resetPtTimerOnly();
+        }
+    });
 
     function tickPtTimer() {
         if (!ptTimerDisplay || !ptTimerEnd) return;
@@ -2343,10 +2402,16 @@
 
     function startPtTimer() {
         clearPtTimer();
+        const practiceEl = document.getElementById('practice');
+        if (!practiceEl || !practiceEl.classList.contains('active')) showChapter('practice');
+        document.documentElement.classList.add('pt-timed-exam');
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(() => {});
+        }
         ptTimerEnd = Date.now() + PT_EXAM_SECONDS * 1000;
         tickPtTimer();
         ptTimerInterval = setInterval(tickPtTimer, 250);
-        if (ptTimerBtn) ptTimerBtn.textContent = 'Stop timer';
+        if (ptTimerBtn) ptTimerBtn.textContent = 'Stop timer & exit focus';
     }
 
     function countPracticeUnanswered() {
