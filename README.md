@@ -45,11 +45,10 @@ Then open `http://localhost:8080/TechPlus_Study_Guide.html`.
 ```
 TechPlus/
 ├── README.md                    ← this file
-├── TechPlus_Study_Guide.html    ← the entire app (content + styles + scripts)
-└── Tech+ Study Guide.pdf        ← optional; Sybex/Wiley companion (not required)
+└── TechPlus_Study_Guide.html    ← the entire app (content + styles + scripts)
 ```
 
-The guide links to a PDF named **`Tech+ Study Guide.pdf`** (URL-encoded in the HTML as `Tech%2B%20Study%20Guide.pdf`). If you keep that file **in the same folder** as the HTML, header and sidebar links will open it. The guide is written to be usable **without** the PDF.
+All study content—including **Exam Essentials** recap sections—is self-contained in the HTML file.
 
 ---
 
@@ -88,21 +87,3 @@ Export/import is not built in; back up your browser profile or avoid resetting i
 - **HTML5** + **CSS** (custom dark theme, responsive sidebar)
 - **Vanilla JavaScript** (IIFE, no frameworks)
 - Fonts: **Space Grotesk** + **JetBrains Mono** (loaded from Google Fonts; requires network unless cached)
-
----
-
-## Contributing
-
-Suggestions and factual corrections are welcome via issues or pull requests. If you add exam-style questions, keep wording original (do not copy paste from proprietary practice exams or brain dumps).
-
----
-
-## License
-
-Specify your license here (e.g. MIT). If you do not add a `LICENSE` file, default copyright applies and others have no clear permission to reuse the content.
-
----
-
-## Author
-
-Replace this section with your name, GitHub handle, or link to your portfolio.
