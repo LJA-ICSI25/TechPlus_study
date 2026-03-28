@@ -98,21 +98,6 @@
             border-radius: 20px;
             border: 1px solid rgba(110, 231, 255, 0.28);
         }
-        .header-pdf-link {
-            font-size: 0.86rem;
-            font-weight: 600;
-            color: var(--accent);
-            text-decoration: none;
-            padding: 0.45rem 0.85rem;
-            border-radius: 10px;
-            border: 1px solid rgba(110, 231, 255, 0.35);
-            transition: background 0.2s, color 0.2s;
-            white-space: nowrap;
-        }
-        .header-pdf-link:hover {
-            background: var(--accent-dim);
-            color: var(--text);
-        }
         .progress-wrap {
             width: 100%;
             margin-top: 0.5rem;
@@ -237,23 +222,6 @@
             color: var(--text);
             border-color: rgba(110, 231, 255, 0.35);
             background: var(--accent-dim);
-        }
-        .sidebar-actions a.sidebar-pdf-btn {
-            display: block;
-            font-size: 0.86rem;
-            font-weight: 600;
-            color: var(--accent);
-            background: var(--accent-dim);
-            border: 1px solid rgba(110, 231, 255, 0.35);
-            border-radius: 10px;
-            padding: 0.6rem 0.85rem;
-            text-decoration: none;
-            text-align: left;
-            transition: all 0.2s ease;
-        }
-        .sidebar-actions a.sidebar-pdf-btn:hover {
-            color: var(--text);
-            border-color: var(--accent);
         }
         .content-wrapper { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
         .content, .home-screen {
@@ -802,10 +770,7 @@
     <header class="header">
         <div class="header-row">
             <a href="#" id="brand-home" class="brand">Tech+ Study Guide</a>
-            <div style="display:flex;align-items:center;gap:0.65rem;flex-wrap:wrap;">
-                <a href="Tech%2B%20Study%20Guide.pdf" class="header-pdf-link" target="_blank" rel="noopener">Wiley book (PDF)</a>
-                <span class="header-badge">CompTIA Tech+</span>
-            </div>
+            <span class="header-badge">CompTIA Tech+</span>
         </div>
         <div class="progress-wrap">
             <div class="progress-label">
@@ -842,7 +807,6 @@
                 <a href="#" data-chapter="practice">Practice exam (52 Q)</a>
             </nav>
             <div class="sidebar-actions">
-                <a href="Tech%2B%20Study%20Guide.pdf" class="sidebar-pdf-btn" target="_blank" rel="noopener">Open Wiley Tech+ PDF</a>
                 <button type="button" id="btn-study-mode">Study mode (fullscreen)</button>
                 <button type="button" id="btn-reset">Reset saved progress</button>
             </div>
@@ -852,7 +816,7 @@
             <div class="home-screen active" id="home-screen">
                 <div class="home-card">
                     <h2>How to use this guide</h2>
-                    <p>This file is written so you can pass <strong>CompTIA Tech+ (FC0-U71)</strong> using <strong>this page alone</strong>: narrative lessons, tables, scenarios, orange recap boxes, per-chapter mini-quizzes, a <strong>52-question practice exam</strong> (including select-all-that-apply style items), a <strong>45-minute timer</strong> for exam pacing, and a full acronym table with matching drills. A physical or PDF book is optional—not required.</p>
+                    <p>This file is written so you can pass <strong>CompTIA Tech+ (FC0-U71)</strong> using <strong>this page alone</strong>: narrative lessons, tables, scenarios, orange <strong>Exam Essentials</strong> recap boxes, per-chapter mini-quizzes, a <strong>52-question practice exam</strong> (including select-all-that-apply style items), a <strong>45-minute timer</strong> for exam pacing, and a full acronym table with matching drills.</p>
                     <p>Open each chapter from the left. Mark objectives as you truly know them; progress saves in this browser (<strong>localStorage</strong>). Use <strong>Skip — I know this</strong> for whole domains you already own so the bar only tracks what matters.</p>
                     <p>Each chapter is a <strong>lesson</strong> first (why things exist, how they fail, what the exam names them), then an orange <strong>Exam Essentials recap</strong> distilling common textbook bullets. Read for understanding first; re-read the orange blocks the week of the test.</p>
                     <p>The <strong>Acronyms</strong> chapter has a searchable table plus a <strong>matching drill</strong>. The <strong>Practice exam</strong> mixes all domains like the real test. Repeat drills and practice until answers feel automatic, not lucky.</p>
@@ -880,7 +844,7 @@
                         </ol>
                     </div>
                     <div class="note" style="margin-top:1.25rem;">
-                        <strong>Optional companion PDF:</strong> If you own <strong>Wiley / Sybex Tech+ Study Guide</strong>, save <code>Tech+ Study Guide.pdf</code> next to this file and use <a href="Tech%2B%20Study%20Guide.pdf" target="_blank" rel="noopener">this link</a> (or header/sidebar buttons) for extra diagrams or chapter exercises. <strong>You do not need the PDF to complete this guide</strong>—lessons and orange recaps are written to stand alone. Official objectives: <a href="https://www.comptia.org/en-us/certifications/tech/#objectives" target="_blank" rel="noopener">CompTIA Tech+ exam objectives</a>.
+                        <strong>Official blueprint:</strong> CompTIA updates exam details from time to time—always confirm question style and objectives on the current bulletin. <a href="https://www.comptia.org/en-us/certifications/tech/#objectives" target="_blank" rel="noopener">CompTIA Tech+ exam objectives</a>
                     </div>
                     <table style="margin-top:1.25rem;">
                         <tr><th colspan="2">CompTIA Tech+ — typical exam facts (check current bulletin)</th></tr>
@@ -993,7 +957,7 @@
                             <strong>Binary drill (one byte):</strong> Bits <code>1100 1010</code> = 128 + 64 + 8 + 2 = <strong>202</strong> decimal. As hex: <code>CA</code> (12 = C, 10 = A). Practice converting your Wi-Fi channel or RAM size into “what does this number mean?” stories, not decimal long division under exam pressure.
                         </div>
                         <div class="wiley-essentials">
-                            <div class="wiley-head">From the Wiley Tech+ Study Guide (FC0-U71) — Exam Essentials</div>
+                            <div class="wiley-head">Exam Essentials recap</div>
                             <h4>Computing &amp; units (Ch.1)</h4>
                             <ul>
                                 <li><strong>IPOS:</strong> input → processing on that input → output → long-term storage.</li>
@@ -1015,7 +979,7 @@
                                 <li><strong>Verify</strong> full functionality; add preventive measures if needed.</li>
                                 <li><strong>Document</strong> findings, actions, outcomes.</li>
                             </ul>
-                            <p class="src">Condensed from Sybex/Wiley <em>CompTIA Tech+ Study Guide</em> Exam Essentials &amp; summaries; optional book expands with figures and labs.</p>
+                            <p class="src">High-yield bullets aligned with typical FC0-U71 training topics—use with the lessons above.</p>
                         </div>
                         <div class="mini-quiz-mount" id="mini-quiz-mount-ch1" data-chapter="ch1" aria-live="polite"></div>
                         <div class="checklist" data-module="m1">
@@ -1149,7 +1113,7 @@
                         <h2>Satellite, KVM, and docking</h2>
                         <p><strong>Satellite Internet</strong> reaches rural areas with high latency (signal to orbit and back)—fine for email and streaming with buffer, poor for competitive online gaming. <strong>KVM</strong> (Keyboard, Video, Mouse) switches let one console control multiple PCs—common in server closets. A <strong>docking station</strong> or <strong>Thunderbolt hub</strong> expands a laptop to many monitors, Ethernet, and USB with one cable.</p>
                         <div class="wiley-essentials">
-                            <div class="wiley-head">Wiley book — high-yield Exam Essentials (hardware, devices, network, cloud)</div>
+                            <div class="wiley-head">Exam Essentials — hardware, devices, network, cloud</div>
                             <h4>Ch.2 Peripherals &amp; connectors</h4>
                             <ul>
                                 <li><strong>Throughput order (smallest→largest):</strong> bps, Kbps, Mbps, Gbps, Tbps. <strong>Uppercase B</strong> = bytes.</li>
@@ -1205,7 +1169,7 @@
                                 <li><strong>Generative AI:</strong> generated code vs generated content (text/graphics).</li>
                                 <li><strong>Predictive:</strong> autocorrect, query suggestions, shopping recommendations.</li>
                             </ul>
-                            <p class="src">Condensed from Wiley Exam Essentials Ch.2–3, 8–9.</p>
+                            <p class="src">Topic recap for connectors, devices, networking, and cloud models.</p>
                         </div>
                         <div class="mini-quiz-mount" id="mini-quiz-mount-ch2" data-chapter="ch2" aria-live="polite"></div>
                         <div class="checklist" data-module="m2">
@@ -1321,7 +1285,7 @@
                         <p><strong>Chrome OS</strong> centers the browser and Android/Linux containers—great for schools and kiosks; local storage is limited; updates are fast. Mainstream <strong>Linux</strong> distributions (Ubuntu, Fedora, etc.) share the same conceptual pieces as Windows (kernel, package manager, permissions) but use different installers (<code>.deb</code>, <code>.rpm</code>, repos) and often a <strong>terminal</strong> for admin tasks. macOS is Unix under the hood with a different GUI and Gatekeeper signing model—exams may mention “vendor store” vs sideloading.</p>
                         <p><strong>MDM</strong> (mobile device management) pushes policies, apps, and wipes to corporate phones—know it as the enterprise control plane for mobile OSes.</p>
                         <div class="wiley-essentials">
-                            <div class="wiley-head">Wiley book — OS &amp; applications (Ch.4–5 Exam Essentials)</div>
+                            <div class="wiley-head">Exam Essentials — operating systems &amp; applications</div>
                             <h4>Operating system (Ch.4)</h4>
                             <ul>
                                 <li>OS components: <strong>file system</strong> traits, file management, built-in apps/utilities, <strong>services</strong>, <strong>processes</strong>, <strong>drivers</strong>, user interfaces.</li>
@@ -1332,7 +1296,7 @@
                             </ul>
                             <h4>Software &amp; browsers (Ch.5)</h4>
                             <ul>
-                                <li><strong>Executable extensions (Sybex list):</strong> <code>.exe</code>, <code>.msi</code>, <code>.app</code>, <code>.bat</code>, and similar vendor launchers (book also mentions <code>.sc.exe</code> style helpers).</li>
+                                <li><strong>Executable extensions (know these):</strong> <code>.exe</code>, <code>.msi</code>, <code>.app</code>, <code>.bat</code>, and similar vendor launchers (some environments also use helper-style executables).</li>
                                 <li><strong>Productivity:</strong> word processing, spreadsheets, presentations, diagramming, browsers.</li>
                                 <li><strong>Collaboration:</strong> email clients, conferencing, online workspace, document storage/sharing.</li>
                                 <li><strong>Utilities:</strong> anti-malware, software firewalls, IM, remote support, compression, PDF readers.</li>
@@ -1342,7 +1306,7 @@
                                 <li>Install: run installer / autorun media; uninstall via OS software manager.</li>
                                 <li>Browser: update version; manage add-ons/extensions; profile sync; bookmarks; default search; clear <strong>cache</strong>; pop-up blocking; <strong>private browsing</strong>; password tools.</li>
                             </ul>
-                            <p class="src">Condensed from Wiley Exam Essentials Ch.4–5.</p>
+                            <p class="src">Topic recap for OS concepts, software types, browsers, and licensing.</p>
                         </div>
                         <div class="mini-quiz-mount" id="mini-quiz-mount-ch3" data-chapter="ch3" aria-live="polite"></div>
                         <div class="checklist" data-module="m3">
@@ -1444,7 +1408,7 @@
                         </div>
                         <p><strong>Version control</strong> (e.g., Git) tracks changes to source over time—rollback, branches, collaboration. You may see it as “where developers store code history,” not something you configure on Tech+.</p>
                         <div class="wiley-essentials">
-                            <div class="wiley-head">Wiley book — Software development (Ch.6 Exam Essentials)</div>
+                            <div class="wiley-head">Exam Essentials — software development basics</div>
                             <ul>
                                 <li><strong>Notations:</strong> binary, decimal, octal, hex; character sets <strong>ASCII</strong> and <strong>Unicode</strong> (Unicode superset of ASCII).</li>
                                 <li><strong>Data types:</strong> char, string, integer, float, Boolean.</li>
@@ -1458,7 +1422,7 @@
                                 <li><strong>Arrays</strong> fixed length, same type; <strong>vectors</strong> dynamic, can mix types (per book).</li>
                                 <li><strong>Functions/methods</strong> group tasks; <strong>objects</strong> bundle attributes/properties and methods—built from <strong>classes</strong> (blueprint).</li>
                             </ul>
-                            <p class="src">Condensed from Wiley Exam Essentials Ch.6.</p>
+                            <p class="src">Topic recap for languages, types, logic, and design notations.</p>
                         </div>
                         <div class="mini-quiz-mount" id="mini-quiz-mount-ch4" data-chapter="ch4" aria-live="polite"></div>
                         <div class="checklist" data-module="m4">
@@ -1539,7 +1503,7 @@
                         </div>
                         <p>A <strong>database dump</strong> is often a logical export (SQL statements or portable format)—restoring may require an empty database first. A <strong>bare-metal</strong> or image backup captures the whole machine state.</p>
                         <div class="wiley-essentials">
-                            <div class="wiley-head">Wiley book — Databases &amp; data continuity (Ch.7 &amp; Ch.12)</div>
+                            <div class="wiley-head">Exam Essentials — databases &amp; data continuity</div>
                             <h4>Database fundamentals (Ch.7)</h4>
                             <ul>
                                 <li>Databases <strong>manage</strong> data: create, import/input, query, report.</li>
@@ -1560,7 +1524,7 @@
                                 <li>Define <strong>backup type</strong>, <strong>location</strong> (local, server, cloud), <strong>schedule</strong>—then <strong>test restores</strong>.</li>
                                 <li><strong>DRP</strong> (disaster recovery) prioritizes what comes back first.</li>
                             </ul>
-                            <p class="src">Condensed from Wiley Exam Essentials Ch.7 and Ch.12 summaries.</p>
+                            <p class="src">Topic recap for relational/non-relational data and backup continuity.</p>
                         </div>
                         <div class="mini-quiz-mount" id="mini-quiz-mount-ch5" data-chapter="ch5" aria-live="polite"></div>
                         <div class="checklist" data-module="m5">
@@ -1649,7 +1613,7 @@
                         <p><strong>Tailgating</strong> follows an authorized person through a door—defeat with badges, mantraps, and culture (“please badge in”). <strong>Clean desk</strong> hides sensitive papers. <strong>USB drops</strong> (malicious flash drives) exploit curiosity—disable AutoRun and use policy. <strong>Screen privacy filters</strong> reduce off-angle viewing; <strong>Win+L</strong> / lock when stepping away.</p>
                         <p><strong>Insider threats</strong> include disgruntled employees and compromised accounts—logging, least privilege, and separation of duties limit damage.</p>
                         <div class="wiley-essentials">
-                            <div class="wiley-head">Wiley book — Security threats &amp; best practices (Ch.10–11 Exam Essentials)</div>
+                            <div class="wiley-head">Exam Essentials — security threats &amp; best practices</div>
                             <h4>Threats, CIA, privacy (Ch.10)</h4>
                             <ul>
                                 <li>Data is an <strong>asset</strong>—used to improve products, target customers, or sold; <strong>critical</strong> data needs strongest controls.</li>
@@ -1678,7 +1642,7 @@
                                 <li>Secure site: URL starts with <code>https://</code>.</li>
                                 <li>Policies: acceptable use, confidentiality handling, security awareness training.</li>
                             </ul>
-                            <p class="src">Condensed from Wiley Exam Essentials Ch.10–11.</p>
+                            <p class="src">Topic recap for CIA, threats, privacy, hardening, and safe computing.</p>
                         </div>
                         <div class="mini-quiz-mount" id="mini-quiz-mount-ch6" data-chapter="ch6" aria-live="polite"></div>
                         <div class="checklist" data-module="m6">
@@ -1718,7 +1682,7 @@
                         </div>
                         <h2>How to learn acronyms as language, not flashcards alone</h2>
                         <p>Three-letter acronyms stick when they sit inside a <em>sentence you could explain to a friend</em>. For each term, ask: <strong>What layer is it?</strong> (hardware, OS, network, app). <strong>What problem does it solve?</strong> <strong>What breaks if it is misconfigured?</strong> Example: <strong>DHCP</strong> is not “a magic setting”—it is how a host learns IP, mask, gateway, and DNS without manual typing. <strong>DNS</strong> is not “the Internet”—it is name resolution; break DNS and IP-only tests still work.</p>
-                        <p>Use the searchable table below as your <strong>primary</strong> glossary—definitions here are written to match what Tech+ expects. Optional: open the <a href="Tech%2B%20Study%20Guide.pdf" target="_blank" rel="noopener">Wiley PDF</a> beside this page for diagrams or chapter cross-references. Networking, storage, and security acronyms (TLS, VPN, WPA, DNS, DHCP, NAS, UPS…) recycle across every CompTIA fundamentals exam—prioritize those clusters first.</p>
+                        <p>Use the searchable table below as your <strong>primary</strong> glossary—definitions here are written to match what Tech+ expects. Networking, storage, and security acronyms (TLS, VPN, WPA, DNS, DHCP, NAS, UPS…) recycle across every CompTIA fundamentals exam—prioritize those clusters first.</p>
                         <div class="key-concept">
                             <strong>Study tactic:</strong> One pass sorted A–Z (this table), one pass using <strong>filter</strong> by topic keyword (<code>wireless</code>, <code>mail</code>, <code>disk</code>), then daily <strong>matching rounds</strong> until you stop guessing.
                         </div>
@@ -1756,8 +1720,8 @@
                         <div id="match-container"></div>
                         <div class="match-result" id="match-result" aria-live="polite"></div>
                         <div class="wiley-essentials">
-                            <div class="wiley-head">Wiley book — vocabulary</div>
-                            <p style="margin:0;font-size:0.93rem;color:var(--text-soft);">The interactive table above is your main glossary. If you also use the Sybex book, its index mirrors many of these terms with longer context—cross-check when you want a second explanation.</p>
+                            <div class="wiley-head">Exam Essentials — vocabulary</div>
+                            <p style="margin:0;font-size:0.93rem;color:var(--text-soft);">The interactive table above is your main glossary—filter by keyword, read definitions in context with the chapters, then run matching drills until recognition is automatic.</p>
                         </div>
                         <div class="mini-quiz-mount" id="mini-quiz-mount-ch7" data-chapter="ch7" aria-live="polite"></div>
                         <div class="checklist" data-module="m7">
