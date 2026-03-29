@@ -629,6 +629,45 @@
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(10px);
         }
+        .pt-mode-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.35rem;
+            width: 100%;
+            margin-bottom: 0.15rem;
+        }
+        .pt-mode-group .pt-mode-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-right: 0.35rem;
+        }
+        .pt-mode-btn {
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.45rem 0.85rem;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s, color 0.2s;
+        }
+        .pt-mode-btn:hover { border-color: var(--accent); color: var(--text); }
+        .pt-mode-btn.active {
+            border-color: rgba(255, 184, 107, 0.55);
+            background: rgba(255, 184, 107, 0.12);
+            color: var(--accent-orange);
+        }
+        .pt-mode-btn.pt-mode-super.active {
+            border-color: rgba(255, 107, 120, 0.65);
+            background: rgba(255, 107, 120, 0.14);
+            color: #ff9aa6;
+        }
         .practice-toolbar .pt-meta {
             font-size: 0.9rem;
             color: var(--text-muted);
@@ -725,6 +764,7 @@
             background: rgba(0, 0, 0, 0.28);
             border-radius: 10px;
             border-left: 3px solid var(--accent);
+            white-space: pre-wrap;
         }
         .pt-question.pt-reveal .pt-explain { display: block; }
         .pt-intro { margin-bottom: 0.5rem; max-width: 48rem; }
@@ -841,7 +881,7 @@
                 <a href="#" data-chapter="ch5">5 · Data &amp; Databases</a>
                 <a href="#" data-chapter="ch6">6 · Security</a>
                 <a href="#" data-chapter="ch7">7 · Acronyms &amp; drills</a>
-                <a href="#" data-chapter="practice">Practice exam (52 Q)</a>
+                <a href="#" data-chapter="practice">Practice (Easy / Hard / Super)</a>
             </nav>
             <div class="sidebar-actions">
                 <button type="button" id="btn-study-mode">Study mode (fullscreen)</button>
@@ -853,10 +893,10 @@
             <div class="home-screen active" id="home-screen">
                 <div class="home-card">
                     <h2>How to use this guide</h2>
-                    <p>This file is written so you can pass <strong>CompTIA Tech+ (FC0-U71)</strong> using <strong>this page alone</strong>: narrative lessons, tables, scenarios, orange <strong>Exam Essentials</strong> recap boxes, per-chapter mini-quizzes, a <strong>52-question practice exam</strong> (including select-all-that-apply style items), a <strong>45-minute timer</strong> for exam pacing, and a full acronym table with matching drills.</p>
+                    <p>This file is written so you can pass <strong>CompTIA Tech+ (FC0-U71)</strong> using <strong>this page alone</strong>: narrative lessons, tables, scenarios, orange <strong>Exam Essentials</strong> recap boxes, per-chapter mini-quizzes, a <strong>52-question practice exam</strong> in <strong>Easy</strong> (exam-style), <strong>Hard</strong> (technical stretch), and <strong>Super hard</strong> (Security+-style depth on topics that still touch Tech+ foundations)—including select-all-that-apply items—a <strong>45-minute timer</strong> for exam pacing, and a full acronym table with matching drills.</p>
                     <p>Open each chapter from the left. Mark objectives as you truly know them; progress saves in this browser (<strong>localStorage</strong>). Use <strong>Skip — I know this</strong> for whole domains you already own so the bar only tracks what matters.</p>
                     <p>Each chapter is a <strong>lesson</strong> first (why things exist, how they fail, what the exam names them), then an orange <strong>Exam Essentials recap</strong> distilling common textbook bullets. Read for understanding first; re-read the orange blocks the week of the test.</p>
-                    <p>The <strong>Acronyms</strong> chapter has a searchable table plus a <strong>matching drill</strong>. The <strong>Practice exam</strong> mixes all domains like the real test. Repeat drills and practice until answers feel automatic, not lucky.</p>
+                    <p>The <strong>Acronyms</strong> chapter has a searchable table plus a <strong>matching drill</strong>. The <strong>Practice exam</strong> mixes all domains; use <strong>Easy</strong> for realistic pacing, <strong>Hard</strong> for over-prep, and <strong>Super hard</strong> only if you enjoy punishment—it is <em>not</em> representative of Tech+ difficulty. Repeat drills and practice until answers feel automatic, not lucky.</p>
                     <p>Open <strong>Practice exam (52 Q)</strong> in the sidebar for sessions that mirror the real format: <strong>single-answer</strong> and <strong>select all that apply</strong>. Turn on the <strong>45-minute timer</strong> for at least one full run—roughly the pace of the live exam. <strong>Grade exam</strong> shows explanations; <strong>New session</strong> shuffles everything.</p>
                     <div class="readiness-contract">
                         <h3>Your pass-readiness contract (do all of this)</h3>
@@ -865,7 +905,7 @@
                             <li><strong>Objectives:</strong> Check off <em>every</em> objective in chapters you are not skipping—only when you could explain the idea aloud without reading.</li>
                             <li><strong>Mini-quizzes:</strong> Score <strong>5/5</strong> on each chapter check-in at least once (re-study the lesson if you miss any).</li>
                             <li><strong>Acronym drill:</strong> Three separate <strong>New round</strong> sessions in a row at <strong>8/8</strong> correct on the matching drill.</li>
-                            <li><strong>Timed practice:</strong> Complete at least one full <strong>52-Q</strong> session with the <strong>45-minute timer</strong> running—finish answering before it hits zero, then grade.</li>
+                            <li><strong>Timed practice:</strong> Complete at least one full <strong>52-Q Easy</strong> session with the <strong>45-minute timer</strong> running—finish answering before it hits zero, then grade. Hard / Super are optional; Super is beyond Tech+ scope on purpose.</li>
                             <li><strong>Score gate:</strong> On <strong>three different</strong> shuffled practice sessions (timer optional for the other two), score <strong>85% or higher</strong>. If you dip below, re-read the weak domain’s chapter and orange box, then try again.</li>
                             <li><strong>Exam logistics:</strong> Night before: solid sleep, confirm appointment, ID, and what the test center allows. Day of: slow reading, eliminate wrong answers first, flag and return on anything shaky.</li>
                         </ol>
@@ -1773,10 +1813,16 @@
                     <div class="chapter-content">
                         <div class="summary-box">
                             <h3>Full practice exam</h3>
-                            <p class="pt-intro" style="margin:0;"><strong>52 questions</strong>—46 single-choice plus <strong>6 select-all-that-apply</strong> (like CompTIA’s multiple-response items). Domains 1.0–6.0. Use the <strong>45-minute timer</strong> to practice pacing (~60 minutes on the real exam for more questions). This is independent study material, not a copy of the live exam. Complete the <strong>pass-readiness contract</strong> on Home before scheduling.</p>
+                            <p class="pt-intro" style="margin:0;"><strong>Three 52-question banks:</strong> <strong>Easy</strong> = exam-style breadth. <strong>Hard</strong> = deeper Tech+ technical detail. <strong>Super hard</strong> blends advanced Tech+ with <strong>Security+-style</strong> depth (PKI, IAM, attacks, IR)—harder than the real Tech+ exam on purpose. Each bank: 46 single-choice + <strong>6 select-all-that-apply</strong>. Domains 1.0–6.0. Use the <strong>45-minute timer</strong> for pacing. Independent study material. Complete the <strong>pass-readiness contract</strong> on Home before scheduling.</p>
                         </div>
                         <div class="practice-toolbar" id="pt-toolbar">
-                            <div class="pt-meta"><strong id="pt-answered-meta">Answered 0 / 52</strong> · Single-choice: pick one. Multi-select: check <em>every</em> correct option, then grade.</div>
+                            <div class="pt-mode-group" role="group" aria-label="Practice difficulty">
+                                <span class="pt-mode-label">Bank</span>
+                                <button type="button" class="pt-mode-btn active" id="pt-mode-easy" data-pt-mode="easy">Easy (exam-level)</button>
+                                <button type="button" class="pt-mode-btn" id="pt-mode-hard" data-pt-mode="hard">Hard (stretch)</button>
+                                <button type="button" class="pt-mode-btn pt-mode-super" id="pt-mode-super" data-pt-mode="super">Super hard (Sec+ blend)</button>
+                            </div>
+                            <div class="pt-meta"><strong id="pt-answered-meta">Answered 0 / 52</strong> · Single-choice: pick one. Multi-select: check <em>every</em> correct option, then <strong>Grade exam</strong>. After grading, each question shows <strong>Correct answer(s)</strong> and <strong>Why</strong>—scroll back through misses to learn for the next session.</div>
                             <button type="button" class="pt-primary" id="pt-btn-grade">Grade exam</button>
                             <button type="button" id="pt-btn-new">New session (shuffled)</button>
                             <button type="button" id="pt-btn-timer">Start 45-min timer</button>
@@ -1795,10 +1841,11 @@
     const STORAGE_KEY = 'techplusStudyGuide_v1';
 
     /**
-     * Practice bank: domain label (CompTIA style), question, four choices, correct index, explanation.
+     * Practice banks: domain label (CompTIA style), question, four choices, correct index (or array for multi-select), explanation.
+     * Easy = exam-style; Hard = technical stretch; Super hard = Security+-adjacent depth, still tied to IT fundamentals (not copied from live exams).
      * Not affiliated with CompTIA; for study only.
      */
-    const PRACTICE_BANK = [
+    const PRACTICE_BANK_EASY = [
         { d: '1.0', q: 'How many bits are in one byte?', o: ['2', '8', '16', '1024'], a: 1, e: 'A byte is 8 bits—the usual unit for characters and many file measurements.' },
         { d: '1.0', q: 'In the IPOS model, saving a file to an SSD so it remains after shutdown is best described as:', o: ['Input', 'Processing', 'Output', 'Storage'], a: 3, e: 'Storage retains data across power cycles; RAM is temporary work space.' },
         { d: '1.0', q: 'Which unit most often describes network link speed (bits per second)?', o: ['MB/s', 'Mbps', 'GHz', 'TB'], a: 1, e: 'Bandwidth is quoted in bps family (Kbps, Mbps, Gbps). MB/s is bytes per second—common for disks.' },
@@ -1851,6 +1898,116 @@
         { d: '2.0', q: 'Which practices improve home or small-office Wi-Fi security? (Select all that apply.)', o: ['Use WPA2 or WPA3 with a strong passphrase instead of an open network', 'Print the Wi-Fi password on a public flyer', 'Change the router’s default administrator password', 'Apply router firmware updates when available'], a: [0, 2, 3], multi: true, e: 'Strong Wi-Fi encryption, non-default admin credentials, and firmware updates are baseline. Broadcasting secrets publicly weakens security.' },
         { d: '5.0', q: 'Which describe relational databases? (Select all that apply.)', o: ['Primary key uniquely identifies a row', 'Foreign key links to another table’s key', 'Data organized in tables with rows and columns', 'Data is always stored only inside the GPU'], a: [0, 1, 2], multi: true, e: 'Relational = tables, rows, columns, keys. GPUs process graphics/compute—they are not where relational data lives.' },
         { d: '5.0', q: 'Which are sound backup practices? (Select all that apply.)', o: ['Test restores periodically to prove backups work', 'Keep multiple copies on different media with at least one off-site (e.g. 3-2-1)', 'Rely on a single copy stored only on the same PC as the live data', 'Encrypt backups that contain sensitive information'], a: [0, 1, 3], multi: true, e: 'Test restores, redundancy, and off-site copies protect against mistakes and site disasters. One local-only copy risks total loss with the machine.' }
+    ];
+
+    const PRACTICE_BANK_HARD = [
+        { d: '1.0', q: 'How many distinct values can 10 binary bits represent?', o: ['512', '1024', '2048', '256'], a: 1, e: 'n bits yield 2^n patterns; 2^10 = 1024.' },
+        { d: '1.0', q: 'In UTF-8, code points U+0000–U+007F (basic ASCII range) are encoded using how many bytes each?', o: ['Always 4 bytes', 'Always 2 bytes', '1 byte', 'They cannot be represented in UTF-8'], a: 2, e: 'UTF-8 is ASCII-compatible: those code points use a single byte with high bit 0.' },
+        { d: '1.0', q: 'On a little-endian machine, the least significant byte of a 32-bit integer is stored at:', o: ['The highest memory address of the word', 'The lowest memory address of the word', 'A separate ROM page', 'The stack pointer only'], a: 1, e: 'Little-endian places the LSB at the smallest address.' },
+        { d: '1.0', q: 'Simultaneous multithreading (SMT) on one physical CPU core typically exposes to the OS as:', o: ['Multiple discrete CPU packages', 'Multiple logical processors sharing execution resources on one core', 'A dedicated GPU raster unit', 'A redundant RAID controller'], a: 1, e: 'SMT (e.g. “hyper-threading”) duplicates architectural state, not full separate cores.' },
+        { d: '1.0', q: 'Consumer NVMe SSDs most commonly connect to the host through:', o: ['Parallel ATA only', 'USB 1.1 full-speed hub', 'PCI Express lanes', 'Legacy floppy controller'], a: 2, e: 'NVMe is designed for PCIe; SATA is a different interface family.' },
+        { d: '1.0', q: 'ECC memory modules in servers are primarily valued for:', o: ['Doubling Wi‑Fi throughput', 'Detecting/correcting certain single-bit RAM errors', 'Replacing TLS certificates', 'GPU texture filtering'], a: 1, e: 'ECC adds error detection/correction bits—common on server/workstation RAM, rare on generic consumer laptops.' },
+        { d: '1.0', q: 'Compared with Cat5e, TIA-568 Cat6 twisted-pair is often specified with:', o: ['No Ethernet support', 'Lower MHz rating than Cat5e', 'Higher performance headroom (e.g. 250 MHz class vs 100 MHz for Cat5e)', 'Fiber-only connectors'], a: 2, e: 'Cat6 tightens crosstalk/performance specs; both can run 1 GbE on typical lengths—Cat6 has more margin for 10 GbE on shorter copper runs.' },
+        { d: '2.0', q: 'In a classic IPv4 /24 (255.255.255.0) subnet, how many addresses are usable for hosts after reserving network and broadcast?', o: ['256', '255', '254', '128'], a: 2, e: '2^8 − 2 = 254 usable .1–.254 in a /24.' },
+        { d: '2.0', q: 'ARP on an IPv4 Ethernet LAN is used to:', o: ['Resolve DNS names to IPv6', 'Map an IPv4 address to a MAC address on the same L2 broadcast domain', 'Negotiate DHCP lease times', 'Encrypt 802.11 management frames'], a: 1, e: 'ARP answers “who has this IP?” on the local segment; routing handles remote subnets.' },
+        { d: '2.0', q: 'The well-known registered TCP port for HTTPS is:', o: ['80', '443', '3389', '445'], a: 1, e: '80 = HTTP; 443 = HTTP over TLS by convention.' },
+        { d: '2.0', q: 'Which statement best contrasts TCP with UDP?', o: ['UDP guarantees in-order delivery; TCP does not', 'TCP is connection-oriented with reliability/ordering semantics as normally implemented; UDP is connectionless datagrams', 'Neither uses port numbers', 'Both are strictly Layer-2 protocols'], a: 1, e: 'TCP adds sessions, ACKs, retransmits; UDP is minimal—apps choose per need.' },
+        { d: '2.0', q: 'IEEE 802.1Q VLAN tagging applies at approximately which layer?', o: ['Physical signaling only', 'Data link (Ethernet frame)', 'Transport only', 'Application presentation only'], a: 1, e: 'The VLAN tag is carried in the Ethernet frame header extension.' },
+        { d: '2.0', q: 'Single-mode fiber is often preferred over UTP for long campus runs partly because:', o: ['Glass fiber conducts lightning strikes better', 'The optical core is immune to typical electrical EMI that affects copper pairs', 'Fiber cannot carry digital signals', 'UTP cannot run Ethernet at any distance'], a: 1, e: 'Fiber avoids electrical pickup; copper needs shielding/length limits for high speeds.' },
+        { d: '2.0', q: 'IEEE 802.3af (PoE Type 1) is commonly summarized at the power-sourcing equipment as roughly:', o: ['240 W per port guaranteed', 'About 15.4 W maximum at the PSE under the standard’s design', 'Unlimited wattage until thermal throttle', '0 W until DHCP succeeds'], a: 1, e: 'Higher classes and 802.3at/bt add more power; af is the classic “~15 W class” baseline.' },
+        { d: '2.0', q: 'An SFP/SFP+ cage on a switch is intended for:', o: ['Parallel printer Centronics', 'Pluggable transceivers (fiber or copper PHY)', 'HDMI 2.1 only', 'PS/2 keyboard pass-through'], a: 1, e: 'Small Form-factor Pluggable modules adapt the port to the physical medium.' },
+        { d: '2.0', q: 'A DNS MX record identifies:', o: ['The default gateway for a subnet', 'Mail exchanger hosts for a domain', 'Wi‑Fi pairwise master key', 'SQL transaction isolation level'], a: 1, e: 'MX directs SMTP where to deliver mail for the domain.' },
+        { d: '2.0', q: 'Subnet mask 255.255.255.192 corresponds to which IPv4 CIDR prefix length?', o: ['/24', '/25', '/26', '/28'], a: 2, e: '192 = 11000000 → 26 network bits (6 host bits → 64 addresses, 62 usable in a typical subnet).' },
+        { d: '2.0', q: 'ICMP echo request/reply (“ping”) is best described as:', o: ['Layer-1 cable toner only', 'Diagnostic messaging within the IP protocol suite', 'SMTP queue synchronization', 'NTFS cluster remapping'], a: 1, e: 'ICMP rides inside IP packets for reachability and diagnostics (when not filtered).' },
+        { d: '2.0', q: 'TLS record encryption for HTTPS logically sits:', o: ['Below IP fragmentation only', 'Above TCP (application data carried as TLS records)', 'Inside the Ethernet preamble field', 'Instead of ARP on the LAN'], a: 1, e: 'TLS provides a secure channel over a reliable byte stream—typically TCP.' },
+        { d: '3.0', q: 'Linux containers (e.g. Docker) on Linux differ from full VMs mainly because containers:', o: ['Each runs a unique guest kernel always', 'Share the host kernel while isolating processes, mounts, and namespaces', 'Cannot use a filesystem', 'Replace DNS entirely'], a: 1, e: 'Containers are OS-level virtualization; VMs virtualize hardware and run full kernels.' },
+        { d: '3.0', q: 'A TPM 2.0 chip is most associated with:', o: ['Increasing monitor refresh rate', 'Root-of-trust crypto keys, measured boot, and BitLocker-class key protection', 'Burning Blu-ray discs only', 'DDR5 timing training'], a: 1, e: 'TPM stores keys and anchors trust chains; it is not generic “make PC faster” silicon.' },
+        { d: '3.0', q: 'Using unsalted MD5 for new password storage in 2026 is rejected because:', o: ['MD5 is too slow for attackers', 'MD5 is cryptographically broken for collisions and is a fast hash—use slow salted algorithms (e.g. Argon2/bcrypt/scrypt)', 'MD5 always outputs 4096-bit digests', 'MD5 requires a smart card reader'], a: 1, e: 'Passwords need slow, salted, modern algorithms; MD5 is unsuitable.' },
+        { d: '3.0', q: 'UEFI Secure Boot helps ensure that:', o: ['Every website uses HTTPS', 'Bootloader/OS loader images in the chain are trusted per policy before execution', 'Wi‑Fi defaults to WEP', 'SQL always runs as sa'], a: 1, e: 'Secure Boot verifies signatures to block pre-OS malware persistence.' },
+        { d: '3.0', q: 'Process browser sandboxing / site isolation primarily reduces:', o: ['CPU GHz rating', 'Blast radius of renderer exploits and cross-site data leakage', 'Printer DPI', 'SATA cable length limits'], a: 1, e: 'Separating origins and tightening privileges limits what a compromised tab can read.' },
+        { d: '4.0', q: 'Big-O notation O(n) conventionally means:', o: ['Exactly n nanoseconds runtime', 'Upper bound on growth proportional to input size n (as n grows)', 'Memory is always zero', 'No loops allowed'], a: 1, e: 'Big-O classifies asymptotic scaling, not a literal constant time.' },
+        { d: '4.0', q: 'A recursive algorithm with no reachable base case tends to:', o: ['Compile faster', 'Overflow the call stack or fail to terminate', 'Automatically use the GPU', 'Fix DNS TTL'], a: 1, e: 'Each call consumes stack frames until limits hit.' },
+        { d: '4.0', q: 'Git is best described as:', o: ['Central print-spooler protocol', 'A distributed version control system', 'A relational DB engine', 'An Ethernet switching algorithm'], a: 1, e: 'Every clone has full history; remotes sync changes.' },
+        { d: '4.0', q: 'A race condition in concurrent programs means:', o: ['Output is always deterministic', 'Correctness may depend on timing/interleaving of operations', 'CPUs cannot cache', 'DHCP is stateful at Layer 7'], a: 1, e: 'Shared mutable state without synchronization yields intermittent bugs.' },
+        { d: '4.0', q: 'In many compiled languages, static typing catches many type errors:', o: ['Only at runtime', 'At compile or static-check time before execution', 'Never', 'Only during DNS resolution'], a: 1, e: 'The checker proves types line up before shipping binaries.' },
+        { d: '4.0', q: 'An immutable value in (functional) programming:', o: ['May be mutated in place by any thread', 'Cannot be changed after creation; updates return new values', 'Is identical to “volatile” in Java', 'Requires RAID 6'], a: 1, e: 'Immutability simplifies reasoning and concurrency safety.' },
+        { d: '5.0', q: 'Third normal form (3NF) in relational theory primarily eliminates:', o: ['All indexes', 'Transitive functional dependencies of non-key attributes on the primary key', 'All foreign keys', 'All surrogate keys'], a: 1, e: '3NF: every non-key column depends on the key, the whole key, and nothing but the key.' },
+        { d: '5.0', q: 'In ACID transactions, the letter “I” stands for:', o: ['Integration', 'Isolation', 'Inheritance', 'Iteration'], a: 1, e: 'Isolation defines how concurrently running transactions see each other’s work.' },
+        { d: '5.0', q: 'An INNER JOIN of tables A and B returns:', o: ['All rows from A with NULL-filled B columns', 'Rows satisfying the join predicate present in both A and B', 'Only non-matching rows', 'A random 10% sample'], a: 1, e: 'Inner join is the intersection on the join condition.' },
+        { d: '5.0', q: 'A B-tree index on a large table typically:', o: ['Removes all INSERT cost', 'Speeds point/range lookups at the cost of extra storage and write maintenance', 'Replaces primary keys', 'Only helps optical disc burning'], a: 1, e: 'Indexes trade write amplification and disk for read performance.' },
+        { d: '5.0', q: 'Write-ahead logging (WAL) means committed changes are considered durable after:', o: ['Data pages hit the disk before the log', 'The log records reach durable storage before related data pages are trusted', 'RAID 0 stripes complete', 'Backups are deleted'], a: 1, e: 'WAL lets the DB replay the log after crashes—log first.' },
+        { d: '5.0', q: 'In a star schema warehouse, dimension tables are often:', o: ['Snowflaked to fifth normal form always', 'Denormalized/wider than typical OLTP normalized tables', 'Stored only in VRAM', 'Identical to foreign keys with zero descriptive columns'], a: 1, e: 'Star favors query speed; snowflake re-normalizes dimensions.' },
+        { d: '5.0', q: 'The CAP theorem’s “P” (partition tolerance) in distributed systems means:', o: ['The network never fails', 'The system continues despite network partitions—forcing tradeoffs with C and A', 'Perfect consistency always', 'Password rotation policy'], a: 1, e: 'Real networks partition; systems choose how they behave when messages are lost/delayed.' },
+        { d: '6.0', q: 'AES-256 is best categorized as:', o: ['An asymmetric key-exchange algorithm only', 'A symmetric block cipher for bulk confidentiality', 'A password hash function', 'A routing protocol'], a: 1, e: 'AES is symmetric; RSA/ECC handle asymmetric roles.' },
+        { d: '6.0', q: 'HMAC-SHA256 with a shared secret primarily provides:', o: ['Confidentiality without integrity', 'Message integrity and authenticity under the secret', 'Non-repudiation without any keys', 'Layer-2 MAC learning'], a: 1, e: 'HMAC proves the message was not tampered with by someone lacking the key.' },
+        { d: '6.0', q: 'Per-password random salts in a hash database mainly defeat:', o: ['GPU thermal throttling', 'Rainbow tables and bulk reuse of precomputed hashes across users', 'DNSSEC deployment', 'MIMO antenna count'], a: 1, e: 'Salts make each hash unique even for identical passwords.' },
+        { d: '6.0', q: 'A “zero-day” vulnerability usually refers to:', o: ['A bug patched decades ago', 'A flaw exploited before a fix is widely available—often unknown to the vendor', 'Software released on Sunday', 'RAID 50 only'], a: 1, e: '“Day zero” is the day you had zero days to patch.' },
+        { d: '6.0', q: 'Certificate pinning in an app mitigates risk when:', o: ['Users type slowly', 'Any trusted CA could otherwise issue a valid cert for your domain—pinning expects specific keys/certs', 'SSD TRIM is slow', 'IPv4 is deprecated'], a: 1, e: 'Pins reduce trust in the entire global CA pool for that connection.' },
+        { d: '6.0', q: 'Spear phishing differs from bulk phishing by:', o: ['Using fax exclusively', 'Targeted research and tailored messages to individuals or roles', 'Requiring WPA3 on printers', 'Mandating disk encryption off'], a: 1, e: 'Spear campaigns impersonate colleagues/vendors with context.' },
+        { d: '6.0', q: 'Defense in depth means security relies on:', o: ['Exactly one firewall forever', 'Multiple independent layers so one control failure is not total compromise', 'Disabling all logs', 'Removing MFA'], a: 1, e: 'Layered controls: endpoint + network + IAM + monitoring…' },
+        { d: '6.0', q: 'Software supply-chain compromise often involves:', o: ['Users choosing weak PINs', 'Malicious or tampered artifacts entering via builds, packages, or trusted vendors', 'RAID 5 write hole myths only', 'DHCP NAK storms'], a: 1, e: 'Attackers poison dependencies, installers, or update channels.' },
+        { d: '6.0', q: 'Typical laptop DDR4/DDR5 SO-DIMMs are:', o: ['Non-volatile archival media', 'Volatile working memory', 'Write-once optical storage', 'BGP route reflectors'], a: 1, e: 'DRAM loses contents without power—volatile.' },
+        { d: '2.0', q: 'Which statements describe TCP as typically implemented? (Select all that apply.)', o: ['Connection-oriented', 'Uses positive acknowledgements and retransmissions for reliability', 'Unreliable fire-and-forget datagrams only', 'Presents an ordered byte-stream abstraction to applications'], a: [0, 1, 3], multi: true, e: 'TCP sets up connections, ACKs lost segments, and delivers an ordered stream; UDP is the classic datagram alternative.' },
+        { d: '1.0', q: 'Which are non-volatile storage or distribution media? (Select all that apply.)', o: ['DDR5 DRAM module', 'NVMe SSD', '7200 RPM hard disk drive', 'Blu-ray disc'], a: [1, 2, 3], multi: true, e: 'DRAM is volatile; SSDs, HDDs, and optical discs retain bits without power.' },
+        { d: '5.0', q: 'Which reduce SQL injection risk when building database-backed apps? (Select all that apply.)', o: ['Parameterized / prepared statements with bound variables', 'Building queries by concatenating raw user input', 'Least-privilege database accounts (minimal DML/DDL rights)', 'Stored procedures that bind parameters instead of dynamic string splice'], a: [0, 2, 3], multi: true, e: 'Never concatenate untrusted input into SQL; bind parameters and scope DB rights tightly.' },
+        { d: '6.0', q: 'Which are sound defenses against reflected or stored XSS? (Select all that apply.)', o: ['Context-appropriate output encoding', 'Content-Security-Policy headers restricting script sources', 'Storing session tokens only in URL query strings for convenience', 'Sanitizing untrusted HTML when markup must be allowed'], a: [0, 1, 3], multi: true, e: 'Encode output, use CSP, sanitize if needed; tokens in URLs leak via Referer and logs.' },
+        { d: '6.0', q: 'Which qualify as distinct authentication factors for MFA? (Select all that apply.)', o: ['Something you know (memorized password)', 'Something you have (OTP app or hardware token)', 'Two different memorized passwords only (same factor twice)', 'Something you are (biometric)'], a: [0, 1, 3], multi: true, e: 'MFA needs independent factor categories; two passwords are still one “knowledge” factor.' },
+        { d: '3.0', q: 'Which align with common REST architectural constraints (Fielding-style, simplified)? (Select all that apply.)', o: ['Stateless interactions between client and server', 'Uniform interface with resource identifiers (e.g. URIs)', 'Mandatory SOAP envelope on every operation', 'Cacheability where responses are explicitly cacheable'], a: [0, 1, 3], multi: true, e: 'REST favors stateless HTTP semantics, resource URIs, and cache headers; SOAP is a different style.' }
+    ];
+
+    const PRACTICE_BANK_SUPER_HARD = [
+        { d: '6.0', q: 'In a typical PKI TLS handshake, the server’s X.509 certificate is primarily used by the client to:', o: ['Derive Wi‑Fi PMK without passphrase', 'Bind the server identity to a public key trusted via a chain to a root CA', 'Replace the need for TCP port numbers', 'Encrypt the entire internet backbone'], a: 1, e: 'The cert carries the server public key and identity; the client verifies the chain and signature, then uses key agreement (e.g. ECDHE) for session keys.' },
+        { d: '6.0', q: 'OCSP stapling on a web server mainly improves which concern versus classic CRL fetching?', o: ['It removes the need for DNS', 'Clients get a fresh, signed revocation status with the handshake—reducing latency and privacy leaks to the CA', 'It disables forward secrecy', 'It guarantees the site cannot be phished'], a: 1, e: 'Stapling attaches a time-bounded OCSP response signed by the CA so browsers need not hit the CA directly for every new visitor.' },
+        { d: '6.0', q: 'Perfect Forward Secrecy (PFS) in TLS 1.2+ when using ephemeral Diffie-Hellman (ECDHE/DHE) means:', o: ['Long-term server cert compromise alone does not decrypt past recorded ciphertext', 'The same session key is reused forever', 'RSA key exchange is always more secure than ECDHE', 'Certificates are no longer validated'], a: 0, e: 'Ephemeral DH yields per-session keys; stealing the cert private key later should not retroactively decrypt old captures (unlike pure RSA key transport).' },
+        { d: '6.0', q: 'A birthday attack is most relevant when assessing risk for:', o: ['AES-GCM key length only', 'Collision resistance of hash functions (e.g. finding two inputs with same digest)', 'Monitor refresh rate', 'DHCP lease renewal'], a: 1, e: 'Birthday paradox lowers brute-force work for collisions versus preimage attacks; why MD5/SHA-1 collision attacks mattered.' },
+        { d: '6.0', q: 'Which attack tricks a user into clicking a disguised element on a malicious page (e.g. transparent iframe overlay)?', o: ['SQL injection', 'Clickjacking (UI redress)', 'VLAN hopping', 'Buffer normalization'], a: 1, e: 'Attacker overlays invisible UI; mitigations include X-Frame-Options, CSP frame-ancestors, and careful UI design.' },
+        { d: '6.0', q: 'Anti-CSRF synchronizer tokens in web apps work because:', o: ['They encrypt the entire disk', 'The attacker’s origin cannot read the token from the victim’s session/page, so cross-site forged POSTs lack the secret', 'They replace HTTPS', 'They fix weak Wi‑Fi passwords'], a: 1, e: 'Same-origin policy blocks cross-origin reads of responses; attacker can lure a submit but not steal the per-session token.' },
+        { d: '6.0', q: 'Subresource Integrity (SRI) on a <script src="…"> tag is designed to:', o: ['Increase cable length limits', 'Verify the fetched file matches an expected cryptographic hash so a CDN compromise cannot silently swap code', 'Disable browser caching', 'Assign IPv6 addresses'], a: 1, e: 'integrity="sha384-…" lets the browser reject mutated third-party JS.' },
+        { d: '6.0', q: 'Business Email Compromise (BEC) schemes most often rely on:', o: ['GPU overclocking', 'Social engineering and forged or compromised email identities to redirect payments or data', 'ARP on IPv6 only', 'RAID 0 striping'], a: 1, e: 'Technical controls (DMARC/SPF/DKIM, verification callbacks) pair with user training—purely technical “magic” does not exist.' },
+        { d: '6.0', q: 'A watering hole attack typically:', o: ['Targets random UDP ports', 'Compromises sites the intended victims already visit to infect their browsers or deliver malware', 'Only affects fiber optics', 'Requires TPM 1.0'], a: 1, e: 'Attacker profiles victim interests, poisons a frequented resource, then pivots.' },
+        { d: '6.0', q: 'Kerberos (conceptual) issues time-bound tickets so that:', o: ['Passwords are sent in every HTTP GET', 'Stolen tickets expire and services can authenticate users without sending long-term secrets over the wire each time', 'DNSSEC is mandatory', 'Wi‑Fi uses WEP'], a: 1, e: 'KDC grants TGT/service tickets; replay windows and key rotation limit abuse.' },
+        { d: '6.0', q: 'SAML federation is most often used for:', o: ['Layer-2 MAC learning', 'Web SSO: an IdP asserts identity to SPs via signed XML assertions', 'Formatting USB drives', 'NVMe queue depth tuning'], a: 1, e: 'Enterprises bridge identities across domains; contrast with OAuth/OIDC’s token flows for APIs and mobile.' },
+        { d: '6.0', q: 'OAuth 2.0 + OpenID Connect, compared to raw SAML browser POST, is commonly favored when:', o: ['Only mainframes exist', 'Mobile/API-first apps need bearer access tokens and JSON metadata (JWKS) rather than browser-only XML posts', 'ARP is disabled', 'RAID 6 is illegal'], a: 1, e: 'OIDC layers identity on OAuth; JWT access/ID tokens suit modern clients—SAML still common in legacy SSO portals.' },
+        { d: '2.0', q: '802.1X port-based network access typically places the authenticator on:', o: ['The user’s mouse', 'The switch or wireless controller that blocks L2 until EAP completes', 'The DNS root servers', 'The Blu-ray drive'], a: 1, e: 'Supplicant (client), authenticator (NAS), authentication server (RADIUS) model.' },
+        { d: '2.0', q: 'RADIUS is most accurately described as:', o: ['A disk file system', 'A UDP-based protocol carrying authentication, authorization, and accounting between NAS and an AAA server', 'A JavaScript bundler', 'HDMI audio codec'], a: 1, e: 'Common with Wi‑Fi enterprise and VPN gateways; TACACS+ uses TCP and separates AAA streams more distinctly (Cisco heritage).' },
+        { d: '2.0', q: 'Compared with RADIUS, TACACS+ is often chosen when administrators need:', o: ['No encryption ever', 'TCP transport and finer per-command authorization auditing on network devices', 'To replace TLS 1.3', 'To eliminate VLANs'], a: 1, e: 'TACACS+ encrypts the entire payload; RADIUS encrypts only the password attribute in classic setups.' },
+        { d: '2.0', q: 'IPsec transport mode versus tunnel mode: tunnel mode:', o: ['Only encrypts TCP headers', 'Encapsulates the entire original IP packet inside new IP/IPsec headers (typical site-to-site VPN)', 'Cannot use AES', 'Runs only on Bluetooth PAN'], a: 1, e: 'Transport mode protects upper-layer payload between hosts; tunnel mode hides inner IP endpoints across a gateway.' },
+        { d: '2.0', q: 'AH versus ESP in IPsec: ESP provides:', o: ['Only integrity without confidentiality option', 'Confidentiality (encryption) and optionally authentication; AH authenticates but does not encrypt payload', 'Only DHCP options', 'Layer-7 load balancing'], a: 1, e: 'ESP is the usual choice for encrypted VPNs; AH covers integrity/origin auth for those who need it without encryption.' },
+        { d: '2.0', q: 'Split-tunnel VPN versus full tunnel: split tunnel means:', o: ['All traffic including cat videos must hit the corporate gateway', 'Only corporate prefixes traverse the VPN; general internet may egress locally', 'DNS is disabled', 'IPsec cannot be used'], a: 1, e: 'Reduces gateway load but can bypass corporate inspection for non-tunneled sites—policy tradeoff.' },
+        { d: '2.0', q: 'IPv6 link-local addresses (fe80::/10) are primarily used for:', o: ['Global BGP peering only', 'On-link neighbor discovery, router advertisements, and autoconfig on the local segment', 'Storing BIOS passwords', '4K video bitrate'], a: 1, e: 'Not routed off-link; combined with NDP (replaces ARP’s role in IPv6).' },
+        { d: '2.0', q: 'DNSSEC adds:', o: ['Faster GPU mining', 'Cryptographic signatures on DNS data so resolvers can validate chain of trust from root to zone', 'Mandatory WEP', 'SQL transactions'], a: 1, e: 'Does not encrypt queries (privacy) by itself—validates authenticity/integrity of answers.' },
+        { d: '2.0', q: 'A SYN scan (half-open) versus a full TCP connect scan differs because SYN scan:', o: ['Always completes the 3-way handshake', 'Often sends SYN without finishing handshake—faster/stealthier but may require raw socket privileges', 'Only works on HTTP/3', 'Replaces DHCP'], a: 1, e: 'Tools like Nmap use raw packets for SYN scan; connect scan uses the OS TCP stack (slower, no special caps).' },
+        { d: '1.0', q: 'ASLR and DEP/NX (Data Execution Prevention) together primarily mitigate:', o: ['Slow DNS TTL', 'Memory corruption exploits that rely on predictable addresses and executable stacks/heap', 'Low monitor contrast', 'RAID 1 write penalty myths'], a: 1, e: 'ASLR randomizes layout; NX marks data pages non-executable—classic defenses against buffer-overflow chains.' },
+        { d: '1.0', q: 'Rowhammer-class attacks conceptually exploit:', o: ['USB-C alt mode only', 'DRAM disturbance errors from rapid adjacent row activations', 'SSD TRIM commands only', 'LDAP port 389 only'], a: 1, e: 'Hardware mitigations (TRR, ECC) and OS allocations reduce practical risk—still taught as physical-layer adjacent bit flips.' },
+        { d: '3.0', q: 'A jump server / bastion host in cloud ops exists to:', o: ['Replace MFA', 'Concentrate administrative access with logging, MFA, and segmentation instead of exposing every VM to the internet', 'Disable SSH entirely', 'Speed up GPU fans'], a: 1, e: 'Break-glass path with strong audit; pairs with private subnets and session recording.' },
+        { d: '5.0', q: 'Recovery Point Objective (RPO) versus Recovery Time Objective (RTO): RPO defines:', o: ['How long power is out', 'Maximum acceptable data loss measured in time (how fresh backups/replication must be)', 'Monitor diagonal inches', 'SQL JOIN count'], a: 1, e: 'RTO = downtime tolerance; RPO = data loss tolerance—drive backup frequency and sync design.' },
+        { d: '5.0', q: 'A differential backup compared to the last full backup:', o: ['Always copies every block in the universe', 'Copies all files changed since the last full backup (grows until next full)', 'Copies only bytes changed since last incremental snapshot of same type', 'Cannot be encrypted'], a: 1, e: 'Incremental backs up since last incremental; differential since last full—restore needs full + latest differential.' },
+        { d: '5.0', q: 'SIEM correlation rules are primarily intended to:', o: ['Render game frames', 'Detect suspicious patterns across many log sources (auth, firewall, EDR) and alert analysts', 'Replace RAID controllers', 'Compile Java bytecode'], a: 1, e: 'SOAR adds automated playbooks; SIEM is aggregation + detection + workflow.' },
+        { d: '4.0', q: 'A timing side channel in software may leak secrets when:', o: ['The code always runs in identical nanoseconds regardless of input', 'Branches or memory access patterns depend on secret data and an attacker can measure elapsed time', 'HTTPS is enabled', 'Git uses SHA-1 for objects'], a: 1, e: 'Constant-time algorithms and blinding reduce leakage—common in crypto libs.' },
+        { d: '4.0', q: 'Static application security testing (SAST) differs from DAST mainly because SAST:', o: ['Requires a running deployed URL only', 'Analyzes source/bytecode without executing the full app in a live environment', 'Cannot find SQLi ever', 'Only scans Wi‑Fi'], a: 1, e: 'SAST finds flaws early; DAST hits running apps; IAST combines instrumentation.' },
+        { d: '3.0', q: 'Code signing for Windows drivers and macOS apps helps users trust binaries because:', o: ['Unsigned code always runs faster', 'The OS can enforce publisher identity and block tampered files (when policies require signatures)', 'It removes need for backups', 'It fixes cable crosstalk'], a: 1, e: 'Part of supply-chain hygiene; stolen or leaked signing keys are high-impact incidents.' },
+        { d: '6.0', q: 'LDAP over LDAPS or StartTLS is used to:', o: ['Print shipping labels', 'Protect directory binds and queries in transit—credentials and attributes should not go cleartext', 'Replace SSD NVMe', 'Configure HDMI-CEC'], a: 1, e: 'Modern guidance: TLS-wrapped LDAP (636) or StartTLS on 389; plain LDAP is legacy inside trusted nets only.' },
+        { d: '6.0', q: 'A polymorphic virus attempts to evade signature scanners by:', o: ['Using only IPv6', 'Mutating decryptor stubs or encrypting its body differently each infection while preserving behavior', 'Disabling CPU caches', 'Running exclusively in BIOS'], a: 1, e: 'Heuristic and behavioral AV plus memory scanning address limitations of static hashes.' },
+        { d: '6.0', q: 'A rootkit that loads in kernel or firmware space is especially dangerous because:', o: ['It cannot hide files', 'It can subvert OS APIs so integrity tools see a false “clean” system', 'It only affects printers', 'It requires no privileges'], a: 1, e: 'Trusted platform / measured boot and offline media forensics help detect low-level compromise.' },
+        { d: '6.0', q: 'Mutual TLS (mTLS) in a microservice mesh means:', o: ['Only humans use passwords', 'Both client and server present certificates—strong service identity without shared static API keys in config files', 'HTTP is impossible', 'DNS is unsigned'], a: 1, e: 'Common with service meshes (SPIFFE/SPIRE); complements JWT for user context.' },
+        { d: '2.0', q: 'BGP route hijacking (conceptual) threatens:', o: ['Only Layer-1 cable toner', 'Internet reachability and integrity—bogus AS paths can redirect or black-hole IP prefixes', 'Blu-ray region codes only', 'CPU microcode version strings'], a: 1, e: 'RPKI ROV helps ISPs drop invalid origin advertisements; still a governance + ops problem.' },
+        { d: '5.0', q: 'Two-phase commit (2PC) in distributed transactions mainly tries to ensure:', o: ['Infinite write throughput', 'All participants agree commit or abort—atomicity across nodes before acknowledging success', 'GPU rasterization order', 'Wi‑Fi channel width'], a: 1, e: 'Blocking coordinator failure is a classic downside; newer systems use saga/outbox patterns.' },
+        { d: '5.0', q: 'A database foreign key with ON DELETE CASCADE means:', o: ['Deletes are forbidden forever', 'Deleting a parent row can automatically delete dependent child rows per schema rules', 'The key is encrypted', 'Indexes are removed'], a: 1, e: 'Powerful but dangerous—misconfigured cascades cause large accidental data loss.' },
+        { d: '4.0', q: 'A deserialization vulnerability (e.g. unsafe pickle/YAML) allows attackers to:', o: ['Speed up legal video streaming', 'Execute arbitrary code or mutate object graphs when untrusted bytes instantiate objects', 'Improve SSD wear leveling', 'Fix VLAN tags'], a: 1, e: 'Never deserialize untrusted data with gadget-rich formats; use JSON schema + safe parsers.' },
+        { d: '3.0', q: 'Container image scanning in CI/CD pipelines targets:', o: ['Monitor Hz', 'Known CVEs in base layers and packages before deploy—shift-left supply-chain risk reduction', 'RAID stripe order only', 'Mouse DPI'], a: 1, e: 'Complements runtime policies (seccomp, AppArmor) and minimal base images.' },
+        { d: '6.0', q: 'FIDO2 / WebAuthn security keys resist phishing better than TOTP apps mainly because:', o: ['They store passwords in cookies', 'Origin binding: the token only signs challenges for the real RP ID (site), not a look-alike domain', 'They disable TLS 1.3', 'They require WEP'], a: 1, e: 'Phishing pages cannot extract a long-term shared secret like they might with badly used SMS OTP flows.' },
+        { d: '2.0', q: 'MTU 1500 on Ethernet and IP fragmentation: oversized packets may be:', o: ['Always dropped silently without notice', 'Fragmented by routers (if allowed) or blocked—IPv6 forbids router fragmentation; endpoints use PMTUD', 'Stored in TPM only', 'Mapped to MAC addresses via ARP only'], a: 1, e: 'Path MTU discovery and jumbo frames matter for performance; black-hole PMTUD breaks TCP mysteriously.' },
+        { d: '1.0', q: 'ECC versus RSA at comparable classical security levels typically offers:', o: ['Larger keys and slower ops', 'Smaller keys and faster operations—important for TLS certs and IoT', 'No use in HTTPS', 'Only symmetric encryption'], a: 1, e: '256-bit ECC rough ≈ 3072-bit RSA for many estimates; quantum computers threaten both via Shor’s algorithm (future PQ crypto).' },
+        { d: '6.0', q: 'A logic bomb activates malicious behavior when:', o: ['The user blinks', 'A defined logical or temporal condition occurs (date, user fired, license expired)', 'HTTPS uses port 443', 'RAID completes resync'], a: 1, e: 'Insider threat pattern; change monitoring and code review reduce risk.' },
+        { d: '6.0', q: 'DLP (Data Loss Prevention) endpoint agents most often inspect:', o: ['Only GPU shaders', 'Content leaving the device—clipboard, USB, email, uploads—against policy', 'DHCP DISCOVER only', 'Monitor EDID only'], a: 1, e: 'Balanced with privacy; complements CASB for cloud egress.' },
+        { d: '3.0', q: 'Immutable infrastructure (cattle not pets) in DevOps means:', o: ['Servers are never replaced', 'Instances are replaced on change rather than long-lived manual drift patching', 'Backups are illegal', 'Containers cannot run'], a: 1, e: 'Pairs with IaC and golden images; reduces snowflake configuration risk.' },
+        { d: '6.0', q: 'Threat hunting differs from traditional alerting because hunters:', o: ['Only react to vendor signatures', 'Proactively hypothesize adversary behaviors and search telemetry even without a fired alert', 'Disable logging', 'Replace MFA with passwords'], a: 1, e: 'Assumes breach; uses MITRE ATT&CK TTPs and anomaly detection.' },
+        { d: '6.0', q: 'Which properties does AES-GCM provide when used correctly? (Select all that apply.)', o: ['Confidentiality of plaintext', 'Integrity/authentication via GMAC', 'Non-repudiation to third parties without extra PKI', 'Resistance to naive tampering of ciphertext'], a: [0, 1, 3], multi: true, e: 'GCM is AEAD: encrypt + MAC. Non-repudiation generally needs digital signatures and identity workflows—not raw AES-GCM alone.' },
+        { d: '2.0', q: 'Which describe defense features of WPA3-Personal versus WPA2-Personal? (Select all that apply.)', o: ['SAE (dragonfly) replaces PSK four-way handshake offline dictionary weakness', 'Individual data confidentiality even if passphrase is known (forward secrecy for wireless frames in model)', 'Mandatory use of WEP for compatibility', 'Protected management frames (PMF) expectations are stronger in practice'], a: [0, 1, 3], multi: true, e: 'WPA3 improves PSK resistance and adds per-session keys; PMF reduces certain deauth abuses. WEP is obsolete.' },
+        { d: '6.0', q: 'Which are examples of MFA phishing-resistant factors or patterns? (Select all that apply.)', o: ['FIDO2/WebAuthn hardware key with origin binding', 'Push notification where user must explicitly approve known context (when implemented well)', 'SMS OTP to any number without number binding', 'Memorized password alone'], a: [0, 1], multi: true, e: 'SMS and bare passwords are weak or single-factor; security keys + careful push reduce real-time phishing relay risk.' },
+        { d: '5.0', q: 'Which steps strengthen backup integrity against ransomware? (Select all that apply.)', o: ['Immutable or offline/air-gapped copies an attacker cannot overwrite', 'Periodic test restores to detect silent corruption', 'Single writable NAS share mapped 24/7 to every desktop as the only backup', 'Versioning with non-deletable retention windows'], a: [0, 1, 3], multi: true, e: 'Attackers hunt online backups; immutability, segmentation, and restore drills are critical.' },
+        { d: '3.0', q: 'Which describe zero trust principles? (Select all that apply.)', o: ['Verify explicitly on every access decision', 'Assume breach—segment and monitor lateral movement', 'Trust the LAN because it is inside the building', 'Least privilege per session/resource'], a: [0, 1, 3], multi: true, e: '“Implicit trust because inside the network” is what zero trust rejects.' },
+        { d: '6.0', q: 'Which are common MITRE ATT&CK tactic categories (names only—select all that apply.)', o: ['Initial Access', 'Persistence', 'Privilege Escalation', 'JPEG Compression'], a: [0, 1, 2], multi: true, e: 'ATT&CK organizes adversary behaviors into tactics and techniques; JPEG compression is not a tactic.' }
     ];
 
     const PT_EXAM_SECONDS = 45 * 60;
@@ -2141,14 +2298,16 @@
     function loadState() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
-            if (!raw) return { objectives: {}, skip: {} };
+            if (!raw) return { objectives: {}, skip: {}, practiceMode: 'easy' };
             const p = JSON.parse(raw);
+            const pm = ['easy', 'hard', 'super'].includes(p.practiceMode) ? p.practiceMode : 'easy';
             return {
                 objectives: p.objectives || {},
-                skip: p.skip || {}
+                skip: p.skip || {},
+                practiceMode: pm
             };
         } catch (e) {
-            return { objectives: {}, skip: {} };
+            return { objectives: {}, skip: {}, practiceMode: 'easy' };
         }
     }
 
@@ -2156,11 +2315,18 @@
         localStorage.setItem(STORAGE_KEY, JSON.stringify({
             v: 1,
             objectives: state.objectives,
-            skip: state.skip
+            skip: state.skip,
+            practiceMode: ['easy', 'hard', 'super'].includes(state.practiceMode) ? state.practiceMode : 'easy'
         }));
     }
 
     let state = loadState();
+
+    function getPracticeBank() {
+        if (state.practiceMode === 'super') return PRACTICE_BANK_SUPER_HARD;
+        if (state.practiceMode === 'hard') return PRACTICE_BANK_HARD;
+        return PRACTICE_BANK_EASY;
+    }
 
     const homeScreen = document.getElementById('home-screen');
     const mainContent = document.getElementById('main-content');
@@ -2240,7 +2406,10 @@
         if (link) link.classList.add('active');
         if (/^ch[1-7]$/.test(chapterId)) ensureMiniQuizBuilt(chapterId);
         if (chapterId === 'ch7') renderMatchRound();
-        if (chapterId === 'practice') ensurePracticeSession();
+        if (chapterId === 'practice') {
+            syncPtModeButtons();
+            ensurePracticeSession();
+        }
     }
 
     brandHome.addEventListener('click', e => { e.preventDefault(); showHome(); });
@@ -2278,7 +2447,8 @@
 
     document.getElementById('btn-reset').addEventListener('click', () => {
         if (!confirm('Clear all saved checkboxes and skip settings in this browser? On-screen chapter mini-quizzes and the practice exam will also reset.')) return;
-        state = { objectives: {}, skip: {} };
+        const keepMode = ['easy', 'hard', 'super'].includes(state.practiceMode) ? state.practiceMode : 'easy';
+        state = { objectives: {}, skip: {}, practiceMode: keepMode };
         saveState(state);
         applyObjectiveState();
         applySkipUI();
@@ -2340,6 +2510,24 @@
             [a[i], a[j]] = [a[j], a[i]];
         }
         return a;
+    }
+
+    /** Full explanation shown after Grade: states the keyed answer(s), then why (for review when wrong). */
+    function buildPracticeExplainText(item) {
+        const isMulti = item.multi === true && Array.isArray(item.a);
+        let answerLine;
+        if (isMulti) {
+            const idxs = item.a.slice().sort((a, b) => a - b);
+            const texts = idxs.map(i => item.o[i]).filter(t => t != null && String(t).length);
+            answerLine = 'Correct answers (all that apply): ' + (texts.length ? texts.join(' · ') : '(see highlighted options above)');
+        } else {
+            const txt = item.o[item.a];
+            answerLine = 'Correct answer: ' + (txt != null && String(txt).length ? txt : '(see highlighted option above)');
+        }
+        const why = typeof item.e === 'string' && item.e.trim()
+            ? item.e.trim()
+            : 'No extra rationale on file—re-read this domain in the guide and the orange Exam Essentials recap.';
+        return answerLine + '\n\nWhy: ' + why;
     }
 
     const ptRoot = document.getElementById('practice-test-root');
@@ -2427,9 +2615,32 @@
 
     function updatePtAnsweredCount() {
         if (!ptRoot || ptGraded) return;
-        const total = PRACTICE_BANK.length;
+        const total = getPracticeBank().length;
         const answered = total - countPracticeUnanswered();
         ptAnsweredMeta.textContent = 'Answered ' + answered + ' / ' + total;
+    }
+
+    function syncPtModeButtons() {
+        const easy = document.getElementById('pt-mode-easy');
+        const hard = document.getElementById('pt-mode-hard');
+        const sup = document.getElementById('pt-mode-super');
+        const m = state.practiceMode;
+        if (easy) easy.classList.toggle('active', m === 'easy');
+        if (hard) hard.classList.toggle('active', m === 'hard');
+        if (sup) sup.classList.toggle('active', m === 'super');
+    }
+
+    function setPracticeDifficulty(mode) {
+        if (mode !== 'easy' && mode !== 'hard' && mode !== 'super') return;
+        if (state.practiceMode === mode) return;
+        const hasQs = ptRoot && ptRoot.querySelector('.pt-question');
+        const hasProgress = hasQs && !ptGraded && ptRoot.querySelector('.pt-question input:checked');
+        if (hasProgress && !confirm('Switching banks discards your current selections and starts a fresh shuffle. Continue?')) return;
+        clearPtTimer();
+        state.practiceMode = mode;
+        saveState(state);
+        syncPtModeButtons();
+        buildPracticeTest(true);
     }
 
     function buildPracticeTest(doShuffle) {
@@ -2438,7 +2649,8 @@
         ptGraded = false;
         ptScoreline.textContent = '';
         ptScoreline.classList.remove('bad');
-        const items = doShuffle ? shuffle(PRACTICE_BANK) : PRACTICE_BANK.slice();
+        const bank = getPracticeBank();
+        const items = doShuffle ? shuffle(bank) : bank.slice();
         ptRoot.innerHTML = '';
         items.forEach((item, qi) => {
             const isMulti = item.multi === true && Array.isArray(item.a);
@@ -2494,7 +2706,7 @@
             box.appendChild(opts);
             const ex = document.createElement('div');
             ex.className = 'pt-explain';
-            ex.textContent = item.e;
+            ex.textContent = buildPracticeExplainText(item);
             box.appendChild(ex);
             ptRoot.appendChild(box);
         });
@@ -2507,7 +2719,7 @@
     function gradePracticeExam() {
         if (!ptRoot || ptGraded) return;
         let correct = 0;
-        const total = PRACTICE_BANK.length;
+        const total = ptRoot.querySelectorAll('.pt-question').length || getPracticeBank().length;
         ptRoot.querySelectorAll('.pt-question').forEach(box => {
             const isMulti = box.classList.contains('pt-multi');
             box.classList.add('pt-graded', 'pt-reveal');
@@ -2578,8 +2790,12 @@
             ptScoreline.textContent = '';
             ptScoreline.classList.remove('bad');
         }
-        if (ptAnsweredMeta) ptAnsweredMeta.textContent = 'Answered 0 / ' + PRACTICE_BANK.length;
+        if (ptAnsweredMeta) ptAnsweredMeta.textContent = 'Answered 0 / ' + getPracticeBank().length;
     }
+
+    document.getElementById('pt-mode-easy').addEventListener('click', () => setPracticeDifficulty('easy'));
+    document.getElementById('pt-mode-hard').addEventListener('click', () => setPracticeDifficulty('hard'));
+    document.getElementById('pt-mode-super').addEventListener('click', () => setPracticeDifficulty('super'));
 
     document.getElementById('pt-btn-grade').addEventListener('click', () => {
         const unanswered = countPracticeUnanswered();
@@ -2598,6 +2814,7 @@
             else startPtTimer();
         });
     }
+    syncPtModeButtons();
 
     function renderMatchRound() {
         matchResult.textContent = '';
