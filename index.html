@@ -25,7 +25,6 @@
             --border: #2a3140;
             --border-strong: #3d4658;
             --glow: rgba(110, 231, 255, 0.12);
-            --content-max: 52rem;
             --prose-rhythm: 1.7;
         }
         * { box-sizing: border-box; }
@@ -246,9 +245,8 @@
             box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
         }
         .chapter-content {
-            max-width: var(--content-max);
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%;
+            max-width: none;
         }
         .chapter-content h2 {
             font-size: 1.32rem;
@@ -278,7 +276,7 @@
             font-size: 0.85em;
             opacity: 0.9;
         }
-        .chapter-content p { margin: 1rem 0; max-width: 50rem; }
+        .chapter-content p { margin: 1rem 0; }
         .chapter-content ul, .chapter-content ol { margin: 1rem 0 1.15rem; padding-left: 1.65rem; }
         .chapter-content li { margin: 0.55rem 0; padding-left: 0.2rem; }
         .chapter-content li::marker { color: var(--accent); }
@@ -527,7 +525,6 @@
             font-size: 0.93rem;
             color: var(--text-muted);
             line-height: 1.6;
-            max-width: 46rem;
         }
         .mq-question {
             margin: 1.35rem 0;
@@ -767,7 +764,7 @@
             white-space: pre-wrap;
         }
         .pt-question.pt-reveal .pt-explain { display: block; }
-        .pt-intro { margin-bottom: 0.5rem; max-width: 48rem; }
+        .pt-intro { margin-bottom: 0.5rem; }
         .pt-multi-badge {
             display: inline-block;
             font-size: 0.72rem;
@@ -833,9 +830,8 @@
             display: none !important;
         }
         html.pt-timed-exam #practice .chapter-content {
-            max-width: 52rem;
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%;
+            max-width: none;
             border-radius: 16px;
         }
         html.pt-timed-exam .practice-toolbar {
