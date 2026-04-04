@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech+ Deep Review Deck</title>
+  <style>
+    :root {
+      --bg: #050d1a;
+      --panel: #0f1c35;
+      --accent: #38bdf8;
+      --accent-2: #34d399;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --warning: #f59e0b;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: 5.8vh 6.5vw 8.5vh;
+      background:
+        radial-gradient(1300px 600px at 0% 0%, #112a4b 0%, transparent 70%),
+        radial-gradient(900px 500px at 100% 100%, #0b5549 0%, transparent 68%),
+        var(--bg);
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.95rem;
+      overflow-y: auto;
+    }
+
+    .kicker {
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(2rem, 4.8vw, 3.5rem); line-height: 1.15; }
+    h2 { font-size: clamp(1.45rem, 3vw, 2.4rem); line-height: 1.2; }
+    h3 { font-size: clamp(1.1rem, 2.2vw, 1.5rem); color: var(--accent); margin-bottom: 0.3rem; }
+
+    p, li {
+      font-size: clamp(0.95rem, 1.75vw, 1.2rem);
+      line-height: 1.42;
+    }
+
+    ul, ol {
+      margin: 0.3rem 0 0 1.1rem;
+      padding: 0;
+    }
+
+    .panel {
+      background: rgba(15, 28, 53, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 12px;
+      padding: 0.95rem 1.1rem;
+      max-width: 1200px;
+    }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 0.85rem;
+      max-width: 1200px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .small { color: var(--muted); font-size: 0.85rem; }
+
+    .tag {
+      display: inline-block;
+      border: 1px solid rgba(203, 213, 225, 0.35);
+      border-radius: 999px;
+      color: #cbd5e1;
+      font-size: 0.78rem;
+      padding: 0.18rem 0.5rem;
+      margin-right: 0.28rem;
+    }
+
+    .warning { color: var(--warning); font-weight: 700; }
+
+    .controls {
+      position: fixed;
+      left: 50%;
+      bottom: 0.85rem;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(1, 6, 20, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 999px;
+      padding: 0.38rem 0.72rem;
+      user-select: none;
+    }
+
+    .btn {
+      border: none;
+      background: #1b3562;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.84rem;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: #25467f; }
+
+    .progress {
+      min-width: 86px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .quiz-list li {
+      margin-bottom: 0.55rem;
+    }
+
+    .answer-btn {
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      background: rgba(11, 20, 40, 0.9);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 0.16rem 0.45rem;
+      margin-left: 0.45rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .answer-btn:hover {
+      background: rgba(28, 45, 82, 0.95);
+    }
+
+    .answer {
+      display: none;
+      margin-top: 0.28rem;
+      color: #bae6fd;
+      font-size: 0.9em;
+    }
+
+    .answer.visible {
+      display: block;
+    }
+
+    @media (max-width: 980px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .slide { padding: 5vh 5.5vw 8.5vh; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide active">
+      <h1>Welcome to Tech+ review</h1>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Class Plan</span>
+      <h2>How to Run This Session</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Suggested Timing (90-120 min)</h3>
+          <ul>
+            <li>10 min: warm-up and objective map</li>
+            <li>50-70 min: domain-by-domain review</li>
+            <li>20 min: scenario troubleshooting + security drills</li>
+            <li>10-15 min: quiz and exam strategy</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Instructor Moves</h3>
+          <ul>
+            <li>Pause every 2-3 slides for learner recap</li>
+            <li>Have students explain terms out loud</li>
+            <li>Use whiteboard for flowcharts/process order</li>
+            <li>Tie each domain to one real-world example</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Objectives</span>
+      <h2>Mastery Targets for Tech+</h2>
+      <div class="panel">
+        <ul>
+          <li>Explain foundational hardware, software, networking, and data concepts in plain language.</li>
+          <li>Use core cybersecurity habits and identify risky behavior in common scenarios.</li>
+          <li>Apply a structured troubleshooting method to basic endpoint and connectivity issues.</li>
+          <li>Understand development/database concepts well enough to follow entry-level IT workflows.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Big Picture</span>
+      <h2>Domain Breakdown</h2>
+      <div class="grid-3">
+        <div class="panel">
+          <h3>IT Concepts</h3>
+          <ul>
+            <li>Terminology</li>
+            <li>Computing models</li>
+            <li>Lifecycle thinking</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Infrastructure</h3>
+          <ul>
+            <li>Devices and cables</li>
+            <li>Network basics</li>
+            <li>Cloud basics</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Software + Data</h3>
+          <ul>
+            <li>OS and apps</li>
+            <li>SDLC concepts</li>
+            <li>Databases and analytics</li>
+          </ul>
+        </div>
+      </div>
+      <p class="small">Security and troubleshooting are cross-domain and appear throughout the exam.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">IT Fundamentals</span>
+      <h2>Key Vocabulary You Must Own</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Core Terms</h3>
+          <ul>
+            <li>Endpoint, host, service, process, thread</li>
+            <li>On-premises, cloud, hybrid</li>
+            <li>Uptime, latency, throughput, bandwidth</li>
+            <li>Availability, integrity, confidentiality</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Operational Terms</h3>
+          <ul>
+            <li>Asset inventory and lifecycle</li>
+            <li>Baseline and change management</li>
+            <li>Incident vs problem vs request</li>
+            <li>Policy, standard, procedure, guideline</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Computing Models</span>
+      <h2>Client/Server, P2P, and Cloud</h2>
+      <div class="grid-3">
+        <div class="panel">
+          <h3>Client/Server</h3>
+          <ul>
+            <li>Centralized control</li>
+            <li>Stronger policy enforcement</li>
+            <li>Common in enterprise environments</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Peer-to-Peer</h3>
+          <ul>
+            <li>Simple and low-cost setup</li>
+            <li>Limited centralized security/control</li>
+            <li>Fits very small environments</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Cloud Services</h3>
+          <ul>
+            <li>IaaS, PaaS, SaaS basics</li>
+            <li>Scalability and shared responsibility</li>
+            <li>Pay-as-you-go cost model</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Hardware Deep Dive</span>
+      <h2>What Each Component Actually Does</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Inside the System</h3>
+          <ul>
+            <li>CPU executes instructions; cores handle parallel work.</li>
+            <li>RAM stores active data; more RAM helps multitasking.</li>
+            <li>Storage keeps data persistently (HDD/SSD/NVMe).</li>
+            <li>Motherboard connects buses, chipset, and peripherals.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Performance Clues</h3>
+          <ul>
+            <li>High disk usage + low RAM = paging/slowdowns.</li>
+            <li>Thermal throttling can reduce CPU performance.</li>
+            <li>Driver issues often present as unstable peripherals.</li>
+            <li>Power problems mimic random system instability.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Ports and Interfaces</span>
+      <h2>Cables, Ports, and Practical Use</h2>
+      <div class="panel">
+        <ul>
+          <li>USB-A/USB-C: data transfer, charging, peripherals; know backward compatibility limits.</li>
+          <li>Display outputs: HDMI, DisplayPort; audio/video support and monitor compatibility.</li>
+          <li>Network: RJ45 Ethernet for stable low-latency connectivity.</li>
+          <li>Audio interfaces: analog jacks vs digital audio transport.</li>
+          <li>Know basic troubleshooting: wrong cable standard, damaged port, outdated driver, wrong input source.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Networking</span>
+      <h2>Network Foundations You Need</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Addressing + Name Resolution</h3>
+          <ul>
+            <li>IP identifies devices; DNS maps names to IPs.</li>
+            <li>Private vs public addressing concepts.</li>
+            <li>Default gateway reaches outside the subnet.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Common Devices</h3>
+          <ul>
+            <li>Modem: WAN handoff from ISP.</li>
+            <li>Router: pathing between networks.</li>
+            <li>Switch: local packet forwarding (Layer 2).</li>
+            <li>Access point: wireless bridge to wired LAN.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Network Triage</span>
+      <h2>Fast Troubleshooting Path (No Internet)</h2>
+      <div class="panel">
+        <ol>
+          <li>Check physical link: cable seated, Wi-Fi connected, adapter enabled.</li>
+          <li>Confirm IP config: has valid local address and gateway.</li>
+          <li>Test local gateway reachability first, then external IP.</li>
+          <li>If IP works but names fail, suspect DNS issue.</li>
+          <li>Reboot endpoint/network gear only after basic checks and documentation.</li>
+        </ol>
+      </div>
+      <p class="warning">Exam traps: skipping scope checks and guessing root cause too early.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Mini Quiz 1</span>
+      <h2>Core Concepts Check</h2>
+      <div class="panel">
+        <ol class="quiz-list">
+          <li>
+            What is the key difference between bandwidth and throughput?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Bandwidth is maximum capacity; throughput is the actual delivered rate after overhead/congestion.</div>
+          </li>
+          <li>
+            In one sentence, explain the difference between an incident and a problem.
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">An incident is an immediate service disruption; a problem is the underlying cause of one or more incidents.</div>
+          </li>
+          <li>
+            Which cloud model gives customers the most infrastructure control: IaaS, PaaS, or SaaS?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">IaaS gives the most infrastructure-level control of the three.</div>
+          </li>
+          <li>
+            Why is identifying scope before troubleshooting considered critical?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Scope tells you impact and likely fault domain, preventing random fixes and saving time.</div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">OS Fundamentals</span>
+      <h2>Operating Systems: What Matters Most</h2>
+      <div class="grid-3">
+        <div class="panel">
+          <h3>Core Roles</h3>
+          <ul>
+            <li>Resource management</li>
+            <li>User/process isolation</li>
+            <li>Device and file control</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Permissions</h3>
+          <ul>
+            <li>User/group model</li>
+            <li>Least privilege</li>
+            <li>Admin elevation concepts</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Maintenance</h3>
+          <ul>
+            <li>Patch management</li>
+            <li>Backups and restore points</li>
+            <li>Log review and monitoring</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Command Line Basics</span>
+      <h2>Useful Commands to Recognize</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Windows Examples</h3>
+          <ul>
+            <li><code>ipconfig</code> for IP settings</li>
+            <li><code>ping</code> for reachability tests</li>
+            <li><code>tasklist</code> / Task Manager for processes</li>
+            <li><code>sfc /scannow</code> for system file checks</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Cross-Platform Concepts</h3>
+          <ul>
+            <li>View network config and route paths</li>
+            <li>List files and permissions</li>
+            <li>Check resource usage (CPU/RAM/disk)</li>
+            <li>Read logs before making assumptions</li>
+          </ul>
+        </div>
+      </div>
+      <p class="small">Focus on command purpose more than memorizing every flag.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Software Lifecycle</span>
+      <h2>Install, Update, Patch, Roll Back</h2>
+      <div class="panel">
+        <ul>
+          <li>Verify source authenticity before installation (official vendor/channel).</li>
+          <li>Check compatibility: OS version, architecture, dependencies.</li>
+          <li>Document major version updates and rollback options.</li>
+          <li>Patch routinely for security and stability; test critical apps after patching.</li>
+          <li>Uninstall cleanly and remove unsupported software to reduce attack surface.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Development Concepts</span>
+      <h2>Software Development and SDLC</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Programming Building Blocks</h3>
+          <ul>
+            <li>Variables, data types, conditionals, loops, functions</li>
+            <li>Input/output and basic validation</li>
+            <li>Common logic bugs and edge cases</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Lifecycle + Collaboration</h3>
+          <ul>
+            <li>Plan -> Design -> Build -> Test -> Deploy -> Maintain</li>
+            <li>Version control for traceability and teamwork</li>
+            <li>Testing levels: unit, integration, user acceptance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Data Basics</span>
+      <h2>Data Handling, Quality, and Governance</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Data Practice</h3>
+          <ul>
+            <li>Structured vs unstructured data</li>
+            <li>Common formats: CSV, JSON, XML, text</li>
+            <li>Data minimization and retention rules</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Quality Criteria</h3>
+          <ul>
+            <li>Accuracy: is data correct?</li>
+            <li>Completeness: missing fields?</li>
+            <li>Consistency: same meaning across systems?</li>
+            <li>Timeliness: updated when needed?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Database Essentials</span>
+      <h2>Relational Thinking for Beginners</h2>
+      <div class="panel">
+        <ul>
+          <li>Tables store entities; rows are records; columns are attributes.</li>
+          <li>Primary key uniquely identifies each row.</li>
+          <li>Foreign key links related tables and enforces relationships.</li>
+          <li>Queries retrieve targeted data using filtering and sorting.</li>
+          <li>Indexes improve read speed but can impact write performance.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Mini Quiz 2</span>
+      <h2>Networking and OS Check</h2>
+      <div class="panel">
+        <ol class="quiz-list">
+          <li>
+            If a host can ping an external IP but cannot browse by domain, what service is most likely failing?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">DNS resolution is the likely failing service.</div>
+          </li>
+          <li>
+            What role does the default gateway play in network communication?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">It forwards traffic destined for networks outside the local subnet.</div>
+          </li>
+          <li>
+            Give one reason a machine with high disk usage and low RAM feels slow.
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Low RAM causes paging to disk, and disk I/O is much slower than memory access.</div>
+          </li>
+          <li>
+            What is one advantage of least privilege in endpoint administration?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">It limits blast radius by reducing what compromised or mistaken accounts can change.</div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Security Core</span>
+      <h2>Threat Types and Defensive Habits</h2>
+      <div class="grid-3">
+        <div class="panel">
+          <h3>Threats</h3>
+          <ul>
+            <li>Malware/ransomware</li>
+            <li>Phishing/smishing/vishing</li>
+            <li>Credential theft</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Controls</h3>
+          <ul>
+            <li>MFA and strong passphrases</li>
+            <li>Patching and endpoint protection</li>
+            <li>Backups + recovery validation</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>User Behavior</h3>
+          <ul>
+            <li>Verify sender/context</li>
+            <li>Report suspicious events fast</li>
+            <li>Least privilege by default</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Identity and Access</span>
+      <h2>Authentication vs Authorization</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Authentication</h3>
+          <ul>
+            <li>Confirms identity: password, token, biometric.</li>
+            <li>MFA combines two or more factors.</li>
+            <li>Account lockout/rate limits reduce brute-force risk.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Authorization</h3>
+          <ul>
+            <li>Defines what an authenticated user can do.</li>
+            <li>Role-based access simplifies management.</li>
+            <li>Periodic access reviews remove stale permissions.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Security Operations</span>
+      <h2>Incident Response (Beginner Level)</h2>
+      <div class="panel">
+        <ol>
+          <li>Identify and document suspicious activity quickly.</li>
+          <li>Contain impacted systems to stop spread.</li>
+          <li>Preserve evidence and escalate appropriately.</li>
+          <li>Eradicate cause and recover services safely.</li>
+          <li>Perform lessons-learned and improve controls.</li>
+        </ol>
+      </div>
+      <p class="small">Do not destroy evidence by making uncontrolled changes before documentation.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Mini Quiz 3</span>
+      <h2>Security and Access Check</h2>
+      <div class="panel">
+        <ol class="quiz-list">
+          <li>
+            What is the difference between authentication and authorization?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Authentication verifies identity; authorization determines what actions/resources that identity can access.</div>
+          </li>
+          <li>
+            Name two warning signs that an email may be phishing.
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Urgent pressure language and mismatched/suspicious sender links are two common signs.</div>
+          </li>
+          <li>
+            What is the first priority after a likely account compromise: containment, documentation, or cleanup?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Containment is first to stop further damage, then documentation and cleanup follow process.</div>
+          </li>
+          <li>
+            Why is MFA effective even when a password is exposed?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Attackers still need an additional factor, so password-only theft is not enough for access.</div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Troubleshooting Method</span>
+      <h2>Step-by-Step Process (Exam Priority)</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Correct Sequence</h3>
+          <ol>
+            <li>Identify problem.</li>
+            <li>Establish theory.</li>
+            <li>Test theory.</li>
+            <li>Plan and implement fix.</li>
+            <li>Verify full function.</li>
+            <li>Document findings.</li>
+          </ol>
+        </div>
+        <div class="panel">
+          <h3>Common Mistakes</h3>
+          <ul>
+            <li>Jumping to fix without isolating scope</li>
+            <li>Changing multiple variables at once</li>
+            <li>Ignoring user communication during outage</li>
+            <li>Failing to record what changed</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Scenario Drill 1</span>
+      <h2>PC Is Slow + Browser Freezes</h2>
+      <div class="panel">
+        <ul>
+          <li>Gather symptoms: all apps or browser only? start time? recent changes?</li>
+          <li>Check resource usage: CPU, RAM, disk queue, startup programs.</li>
+          <li>Test likely causes: too many tabs, low memory, malware, storage bottleneck.</li>
+          <li>Apply fix: disable startup bloat, patch browser/OS, run security scan.</li>
+          <li>Validate by reproducing normal workload and documenting results.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Scenario Drill 2</span>
+      <h2>User Clicked Suspicious Link</h2>
+      <div class="panel">
+        <ul>
+          <li>Ask what was clicked/downloaded and when it happened.</li>
+          <li>Disconnect affected device if compromise is likely.</li>
+          <li>Reset credentials from known-safe device.</li>
+          <li>Run endpoint scans and check unusual account activity.</li>
+          <li>Document, report, and provide user awareness follow-up.</li>
+        </ul>
+      </div>
+      <p class="warning">Priority is containment first, then cleanup.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Scenario Drill 3</span>
+      <h2>Cannot Print to Network Printer</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Quick Checks</h3>
+          <ul>
+            <li>Printer power/ready state and paper/toner</li>
+            <li>Client on same network/VLAN path</li>
+            <li>Correct printer selected and set as default</li>
+            <li>Queue not stuck with failed job</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Escalation Path</h3>
+          <ul>
+            <li>Restart spooler/service if needed</li>
+            <li>Update/reinstall print driver</li>
+            <li>Test from second endpoint for scope</li>
+            <li>Document final root cause + fix</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Mini Quiz 4</span>
+      <h2>Troubleshooting and Process Check</h2>
+      <div class="panel">
+        <ol class="quiz-list">
+          <li>
+            Which troubleshooting step comes before implementing a fix?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Test the theory to determine cause comes before planning/implementing the fix.</div>
+          </li>
+          <li>
+            Why should you change one variable at a time during diagnosis?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">It isolates causality so you can confidently attribute outcomes to a specific change.</div>
+          </li>
+          <li>
+            What should a strong ticket note always include after each action?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Timestamp, action taken, observed result, and next step/decision.</div>
+          </li>
+          <li>
+            In exam questions, what clue words usually indicate process order matters most?
+            <button class="answer-btn" type="button">Reveal Answer</button>
+            <div class="answer">Words like first, best initial, most likely next, and immediate indicate sequence priority.</div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Tools and Documentation</span>
+      <h2>Professional Habits That Raise Scores</h2>
+      <div class="panel">
+        <ul>
+          <li>Use ticket notes with timestamped actions and observed outcomes.</li>
+          <li>Keep known-good baselines for endpoints and network settings.</li>
+          <li>Use checklists for repeatable maintenance and onboarding.</li>
+          <li>Communicate clearly to users: issue, impact, ETA, workaround.</li>
+          <li>Practice post-incident reviews to prevent repeat failures.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Practice Quiz</span>
+      <h2>Knowledge Check (Part 1)</h2>
+      <div class="panel">
+        <ol>
+          <li>What is the difference between authentication and authorization?</li>
+          <li>Why does DNS matter if an IP address can be used directly?</li>
+          <li>Which troubleshooting step comes before implementing a fix?</li>
+          <li>Give one reason to choose wired over wireless networking.</li>
+          <li>Name one example of least privilege in daily IT operations.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Practice Quiz</span>
+      <h2>Knowledge Check (Part 2)</h2>
+      <div class="panel">
+        <ol>
+          <li>What signs suggest phishing rather than a legitimate message?</li>
+          <li>How do backups reduce ransomware impact?</li>
+          <li>What is a primary key and why is it important?</li>
+          <li>Why should software patches be tested in critical environments?</li>
+          <li>What is a likely cause when internet works by IP but not by name?</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Exam Tactics</span>
+      <h2>How to Handle Tech+ Questions</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Reading Strategy</h3>
+          <ul>
+            <li>Underline clue words: first, best, most secure, most likely.</li>
+            <li>Identify domain quickly: network, security, software, process.</li>
+            <li>Remove clearly wrong choices before deciding.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Time Strategy</h3>
+          <ul>
+            <li>Move fast on straightforward recall questions.</li>
+            <li>Flag scenario-heavy items and return later.</li>
+            <li>Leave no blanks; educated guesses beat empty answers.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Last Week Prep</span>
+      <h2>7-Day Review Plan</h2>
+      <div class="panel">
+        <ul>
+          <li>Day 1: IT concepts + hardware review and notes cleanup.</li>
+          <li>Day 2: Networking fundamentals and troubleshooting drills.</li>
+          <li>Day 3: OS/software lifecycle and command recognition.</li>
+          <li>Day 4: Data/database terms and simple scenario practice.</li>
+          <li>Day 5: Security concepts + incident response flow.</li>
+          <li>Day 6: Mixed practice exam and targeted weak-domain review.</li>
+          <li>Day 7: Light recap, rest, and logistics check for test day.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Final Checklist</span>
+      <h2>Ready-to-Test Indicators</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>You Are Ready If...</h3>
+          <ul>
+            <li>You can explain each domain without reading notes.</li>
+            <li>You can run the troubleshooting sequence in order.</li>
+            <li>You can identify obvious security red flags instantly.</li>
+            <li>You consistently score well on mixed questions.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Night Before</h3>
+          <ul>
+            <li>Set exam route/logins and ID materials.</li>
+            <li>Stop heavy cramming; review summary sheet only.</li>
+            <li>Sleep and hydration matter for performance.</li>
+            <li>Arrive with calm, process-focused mindset.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Wrap-Up</span>
+      <h2>Teach It, Apply It, Pass It</h2>
+      <p class="panel">
+        Use this deck as your full review backbone. Add your own local examples and lab demos to make each domain stick.
+      </p>
+      <p>You now have a longer, in-depth Tech+ class flow ready to present.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">Q&A</span>
+      <h2>Questions?</h2>
+      <div class="panel">
+        <ul>
+          <li>What topic needs one more example?</li>
+          <li>Which scenario type should we practice again?</li>
+          <li>What still feels unclear before test day?</li>
+        </ul>
+      </div>
+      <p class="small">Take a minute to write one question, then we will go through them together.</p>
+    </section>
+  </main>
+
+  <div class="controls">
+    <button class="btn" id="prevBtn" type="button" aria-label="Previous slide">◀ Prev</button>
+    <span class="progress" id="progress">1 / 33</span>
+    <button class="btn" id="nextBtn" type="button" aria-label="Next slide">Next ▶</button>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const progress = document.getElementById("progress");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    let current = 0;
+
+    function renderSlide(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === current);
+      });
+      progress.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    function nextSlide() {
+      renderSlide(current + 1);
+    }
+
+    function prevSlide() {
+      renderSlide(current - 1);
+    }
+
+    renderSlide(0);
+
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
+
+    document.addEventListener("keydown", (event) => {
+      const key = event.key.toLowerCase();
+      if (event.key === "ArrowRight" || event.key === " " || event.key === "PageDown") {
+        event.preventDefault();
+        nextSlide();
+      } else if (event.key === "ArrowLeft" || event.key === "PageUp") {
+        event.preventDefault();
+        prevSlide();
+      } else if (key === "home") {
+        renderSlide(0);
+      } else if (key === "end") {
+        renderSlide(slides.length - 1);
+      } else if (key === "f") {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest(".answer-btn");
+      if (!button) {
+        return;
+      }
+      const answer = button.parentElement.querySelector(".answer");
+      if (!answer) {
+        return;
+      }
+      answer.classList.toggle("visible");
+      button.textContent = answer.classList.contains("visible") ? "Hide Answer" : "Reveal Answer";
+    });
+  </script>
+</body>
+</html>
